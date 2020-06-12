@@ -138,6 +138,7 @@ dist
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+.idea
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,node
 
