@@ -6,11 +6,6 @@
 .sendBtn {
   color: blue;
   cursor: pointer;
-  position: fixed;
-  left: 400px;
-  bottom: 0px;
-  padding: 10px;
-  height: 100px;
 }
 
 .inputChat {

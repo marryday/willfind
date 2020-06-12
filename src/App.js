@@ -9,11 +9,12 @@ import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
 import { MapComponent } from "./components/MapComponent";
+import Chat from './components/Chat'
 function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <Route exact path="/"></Route>
+      <Route exact path="/"><Chat /></Route>
       <Route exact path="/login">
         <Login />
       </Route>
