@@ -8,7 +8,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
-
 function App() {
   return (
     <BrowserRouter>
