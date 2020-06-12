@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import firebase from "firebase";
 import TextField from "@material-ui/core/TextField";
 import Send from "@material-ui/icons/Send";
@@ -28,20 +28,19 @@ export default () => {
       let newMessages = [];
       snapshot.forEach((child) => {
         let message = child.val();
-        if (message.type === 'text'){
-        newMessages.push({
-          id: child.key,
-          text: message.text,
-          user: message.me,
-        })}
-        else if(message.type === 'file'){
+        if (message.type === "text") {
+          newMessages.push({
+            id: child.key,
+            text: message.text,
+            user: message.me,
+          });
+        } else if (message.type === "file") {
           newMessages.push({
             id: child.key,
             url: `http://files/${message.text}`,
-            user: message.me
-          })
+            user: message.me,
+          });
         }
-      
       });
       setMessages(newMessages);
     });
@@ -57,11 +56,15 @@ export default () => {
 
   return (
     <div className="chat">
-      {messages.map((message) => (
-        <p key={message.id} ref={ref}>
-          {message.text} {message.url}
-        </p>
-      ))}
+      {messages.map((message) =>
+        message.text ? (
+          <p key={message.id} ref={ref}>
+            {message.text}
+          </p>
+        ) : (
+          <img src={message.url} alt="" />
+        )
+      )}
       <div className="inputChat">
         <TextField
           placeholder="Type something..."
