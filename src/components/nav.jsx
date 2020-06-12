@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { logoutSaga } from "../actionCreators/actionCreatorSaga";
 import Toogle from "./toogle";
 import MenuIcon from '@material-ui/icons/Menu';
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,14 +44,14 @@ export default function ButtonAppBar() {
           </Typography>
           {userSession ?
             <>
-              <Button href='/#' color="inherit">map</Button>
+              <Button href='/map' color="inherit">map</Button>
               <Button href='#' color="inherit">{userName} </Button>
               <Button href='/profile/logout' color="inherit" onClick={() => dispatch(logoutSaga())}>Logout</Button>
               <Toogle />
 
             </> :
             <>
-              <Button href='/#' color="inherit">map</Button>
+              <Button href='/map' color="inherit">map</Button>
               <Button href='/login' color="inherit">Login</Button>
               <Toogle />
 
