@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <Route exact path="/"><Chat /></Route>
+      <Route exact path="/"></Route>
       <Route exact path="/login">
         <Login />
       </Route>
@@ -23,6 +23,9 @@ function App() {
       </Route>
       <Route exact path="/map">
         <MapComponent />
+      </Route>
+      <Route exact path="/chat">
+        <Chat />
       </Route>
     </BrowserRouter>
   );

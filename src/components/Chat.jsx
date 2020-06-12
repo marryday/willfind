@@ -62,7 +62,7 @@ export default () => {
             {message.text}
           </p>
         ) : (
-          <img src={message.url} alt="" />
+          <p src={message.url} alt="">{message.url} </p>
         )
       )}
       <div className="inputChat">
