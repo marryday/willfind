@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useLayoutEffect, useRef } from "react";
 import firebase from "firebase";
+import TextField from "@material-ui/core/TextField";
+import Send from "@material-ui/icons/Send";
+import "./ChatStyle.css";
 
 export default () => {
   const address = document.location.href;
-
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const ref = useRef(null);
@@ -18,17 +20,14 @@ export default () => {
       appId: "1:667423176876:web:68bc69f60dab12c3bf4709",
     };
 
-    // Initialize Firebase
-
     firebase.initializeApp(firebaseConfig);
     getMessages();
   }, []);
 
   useEffect(() => {
-    const container = document.getElementById("chatview-container");
-    window.scrollTo(0, container.scrollHeight);
-    console.log('123')
-  });
+    ref.current && ref.current.scrollIntoView();
+    console.log(ref);
+  }, [messages]);
 
   //   const storageRef = firebase.storage().ref();
   //   const imagesRef = storageRef.child('images');
@@ -59,48 +58,38 @@ export default () => {
       user: "me",
     });
   };
-  const styleInput = {
-    position: "fixed",
-    left: "0",
-    bottom: "0",
-    padding: "10",
-  };
-  const styleButton = {
-      position: "fixed",
-      left: '200px',
-      bottom: "0",
-      padding: "10",
-    };
-  
-  // const [input, setInput] = useState("");
-  // const [messages, setMessages] = useState([]);
-  // const [container, setContainer] = useState(document.getElementById('chatview-container'))
-  // if(container) setContainer(document.getElementById('chatview-container').scrollTo(0, container.scrollHeight))
+
   return (
-    <div className="chat" id="chatview-container">
-      {messages.map((message) => (
-        <p key={message.id}> {message.text}</p>
-      ))}
-      <input
-        placeholder="Type something..."
-        onChange={(e) => setInput(e.target.value)}
-        type="text"
-        value={input}
-        style={styleInput}
-        onKeyPress={(e) => {
-          if (e.charCode === 13 && input.trim() !== "") {
-            setMessages([...messages, input]);
-            writeMessageToDb(input);
-            setInput("");
-          }
-        }}
-      ></input>
-      <input
-        style={styleButton}
-        type="file"
-        name="myFile"
-        onSubmit={(file) => console.log(file.filename())}
-      />
+    <div className="chat">
+        {messages.map((message) => (
+          <p className="paragraph" key={message.id} ref={ref}>
+            {message.text}
+          </p>
+        ))}
+      <div className="inputChat">
+        <TextField
+          placeholder="Type something..."
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
+          value={input}
+          onKeyPress={(e) => {  
+            if (e.charCode === 13 && input.trim() !== "") {
+              setMessages([...messages, input]);
+              writeMessageToDb(input);
+              setInput("");
+            }
+          }}
+        ></TextField>
+        <Send
+          onClick={() => {
+            if (input.trim() !== "") {
+              setMessages([...messages, input]);
+              writeMessageToDb(input);
+              setInput("");
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };

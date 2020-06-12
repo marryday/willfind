@@ -1,0 +1,22 @@
+.sendBtn {
+  color: blue;
+  cursor: pointer;
+  position: fixed;
+  left: 400px;
+  bottom: 0px;
+  padding: 10px;
+  height: 100px;
+}
+
+.inputChat {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  padding: 10px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+

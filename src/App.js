@@ -9,7 +9,6 @@ import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
 import { MapComponent } from "./components/MapComponent";
-
 function App() {
   return (
     <BrowserRouter>
