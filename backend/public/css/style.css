@@ -1,0 +1,44 @@
+body {
+  background: url(/uploads/background38.png);
+}
+
+.profile-image {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 75px;
+  border: 1px solid #ffffff;
+}
+.profile-image:hover {
+  border: 1px solid #acacac;
+}
+
+.profile-left-side {
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 15px;
+}
+
+#profile-left-side-container:hover {
+  background-color: rgb(139, 139, 139);
+  border-radius: 3px;
+  color: white;
+}
+#profile-left-side-container {
+  padding: 5px 15px 5px 15px;
+  display: block;
+}
+
+.stretched-link::after {
+  position: inherit;
+}
+
+.main-container {
+  width: 85%;
+  margin: auto;
+}
+
+.post-image {
+  max-width: 15px;
+  max-height: 15px;
+  border-radius: 7px;
+}
