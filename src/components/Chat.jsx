@@ -6,7 +6,7 @@ import "./ChatStyle.css";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { firebaseConfig } from "../FirebaseConfig";
-
+import { FormHelperText } from '@material-ui/core';
 export default () => {
   const address = document.location.href;
   const [input, setInput] = useState("");
@@ -32,7 +32,7 @@ export default () => {
           newMessages.push({
             id: child.key,
             text: message.text,
-            user: message.me,
+            user: message.user,
           });
         } else if (message.type === "file") {
           console.log(message.text)
@@ -45,7 +45,7 @@ export default () => {
           newMessages.push({
             id: child.key,
             url: message.text,
-            user: message.me,
+            user: message.user,
           });
         }
       });
@@ -56,7 +56,7 @@ export default () => {
   const writeMessageToDb = (message, type) => {
     firebase.database().ref(`${address}`).push({
       text: message,
-      user: "me",
+      user: localStorage.getItem('userName'),
       type: type,
     });
   };
@@ -79,12 +79,17 @@ export default () => {
   return (
     <div className="chat">
       {messages.map((message) =>
-        message.text ? (
+        message.text ? (<>
+          <FormHelperText>{message.user}</FormHelperText>
           <p key={message.id} ref={ref}>
             {message.text}
           </p>
+          </>
         ) : (
+          <>
+          <FormHelperText>{message.user}</FormHelperText>
           <img src={process.env.PUBLIC_URL + `${message.url}`} style={{maxWidth: '300px'}} />
+          </>
         )
       )}
       <div className="inputChat">
