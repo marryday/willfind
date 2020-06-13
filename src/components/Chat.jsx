@@ -36,15 +36,15 @@ export default () => {
           });
         } else if (message.type === "file") {
           console.log(message.text)
-          let url
-           fetch('/upload/url', {
-            method: 'POST',
-            body: 'adad'
-          }).then(response => response.json().then(result => url = result ));
+          // let url
+          //  fetch('/upload/url', {
+          //   method: 'POST',
+          //   body: 'adad'
+          // }).then(response => response.json().then(result => url = result ));
 
           newMessages.push({
             id: child.key,
-            url: `${message.text}`,
+            url: message.text,
             user: message.me,
           });
         }
@@ -84,7 +84,7 @@ export default () => {
             {message.text}
           </p>
         ) : (
-          <img src={process.env.PUBLIC_URL + "uploads/Screenshot_1.png"} />
+          <img src={process.env.PUBLIC_URL + `${message.url}`} style={{maxWidth: '300px'}} />
         )
       )}
       <div className="inputChat">
