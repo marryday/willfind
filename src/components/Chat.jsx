@@ -22,7 +22,7 @@ export default () => {
     ref.current && ref.current.scrollIntoView();
   }, [messages]);
 
-  const getMessages = () => {
+  const getMessages = async () => {
     let messagesDB = firebase.database().ref(`${address}`);
     messagesDB.on("value", (snapshot) => {
       let newMessages = [];
@@ -35,9 +35,16 @@ export default () => {
             user: message.me,
           });
         } else if (message.type === "file") {
+          console.log(message.text)
+          let url
+           fetch('/upload/url', {
+            method: 'POST',
+            body: 'adad'
+          }).then(response => response.json().then(result => url = result ));
+
           newMessages.push({
             id: child.key,
-            url: `http://files/${message.text}`,
+            url: `${message.text}`,
             user: message.me,
           });
         }
@@ -54,6 +61,21 @@ export default () => {
     });
   };
 
+  const uploadFile = async (event) => {
+    
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    try{
+      const res = await (await fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })).json()
+      writeMessageToDb(res.filePath, "file")
+    }catch(e){
+
+    }
+  }
+
   return (
     <div className="chat">
       {messages.map((message) =>
@@ -62,11 +84,11 @@ export default () => {
             {message.text}
           </p>
         ) : (
-          <p src={message.url} alt="">{message.url} </p>
+          <img src={process.env.PUBLIC_URL + "uploads/Screenshot_1.png"} />
         )
       )}
       <div className="inputChat">
-        <TextField
+        <TextField  
           placeholder="Type something..."
           onChange={(e) => setInput(e.target.value)}
           type="text"
@@ -93,8 +115,7 @@ export default () => {
           style={{ display: "none" }}
           type="file"
           id="icon-button-file"
-          onChange={(event) =>
-            writeMessageToDb(event.target.files[0].name, "file")
+          onChange={(event) => uploadFile(event)
           }
         />
         <label htmlFor="icon-button-file">

@@ -10,7 +10,7 @@ const hbs = require('hbs');
 const fileUpload = require('express-fileupload');
 const bcrypt = require('bcrypt');
 const cors = require("cors")
-
+const uploadRouter = require('./routes/upload')
 const profileRouter = require('./routes/profile');
 const app = express();
 
@@ -65,7 +65,7 @@ app.use(
   })
 );
 
-
+app.use('/upload', uploadRouter)
 //app.use('/', indexRouter);
 app.use('/profile', profileRouter);
 //app.use('/api/board', gamesRouter);
