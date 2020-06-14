@@ -6,7 +6,7 @@ import "./ChatStyle.css";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { firebaseConfig } from "../FirebaseConfig";
-import { FormHelperText } from '@material-ui/core';
+import { FormHelperText } from "@material-ui/core";
 export default () => {
   const address = document.location.href;
   const [input, setInput] = useState("");
@@ -35,7 +35,7 @@ export default () => {
             user: message.user,
           });
         } else if (message.type === "file") {
-          console.log(message.text)
+          console.log(message.text);
           // let url
           //  fetch('/upload/url', {
           //   method: 'POST',
@@ -54,46 +54,62 @@ export default () => {
   };
 
   const writeMessageToDb = (message, type) => {
-    firebase.database().ref(`${address}`).push({
-      text: message,
-      user: localStorage.getItem('userName'),
-      type: type,
-    });
+    firebase
+      .database()
+      .ref(`${address}`)
+      .push({
+        text: message,
+        user: localStorage.getItem("userName"),
+        type: type,
+      });
   };
 
-  const uploadFile = async (event) => {
-    
-    const formData = new FormData();
-    formData.append('file', event.target.files[0]);
-    try{
-      const res = await (await fetch('/upload', {
-        method: 'POST',
-        body: formData
-      })).json()
-      writeMessageToDb(res.filePath, "file")
-    }catch(e){
+  const uploadPhoto = (event) => {
+    const file = event.target.files[0];
+    const uploadTask = firebase.storage().ref(`/images/${file.name}`).put(file);
 
-    }
-  }
+    uploadTask.on(
+      "state_changed",
+      (snapShot) => {
+        console.log(snapShot);
+      },
+      (err) => {
+        console.log(err);
+      },
+      () =>
+        firebase
+          .storage()
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((firebaseUrl) => {
+            writeMessageToDb(firebaseUrl, "file");
+          })
+    );
+  };
 
   return (
     <div className="chat">
       {messages.map((message) =>
-        message.text ? (<>
-          <FormHelperText>{message.user}</FormHelperText>
-          <p key={message.id} ref={ref}>
-            {message.text}
-          </p>
+        message.text ? (
+          <>
+            <FormHelperText>{message.user}</FormHelperText>
+            <p key={message.id} ref={ref}>
+              {message.text}
+            </p>
           </>
         ) : (
           <>
-          <FormHelperText>{message.user}</FormHelperText>
-          <img src={process.env.PUBLIC_URL + `${message.url}`} style={{maxWidth: '300px'}} />
+            <FormHelperText>{message.user}</FormHelperText>
+            <img
+              src={process.env.PUBLIC_URL + `${message.url}`}
+              style={{ maxWidth: "300px" }}
+            />
           </>
         )
       )}
       <div className="inputChat">
-        <TextField  
+        <TextField
           placeholder="Type something..."
           onChange={(e) => setInput(e.target.value)}
           type="text"
@@ -120,8 +136,7 @@ export default () => {
           style={{ display: "none" }}
           type="file"
           id="icon-button-file"
-          onChange={(event) => uploadFile(event)
-          }
+          onChange={(event) => uploadPhoto(event)}
         />
         <label htmlFor="icon-button-file">
           <IconButton
