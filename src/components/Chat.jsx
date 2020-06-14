@@ -19,7 +19,11 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    ref.current && ref.current.scrollIntoView();
+    ref.current && ref.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start"
+    });
   }, [messages]);
 
   const getMessages = async () => {
@@ -35,12 +39,6 @@ export default () => {
             user: message.user,
           });
         } else if (message.type === "file") {
-          console.log(message.text);
-          // let url
-          //  fetch('/upload/url', {
-          //   method: 'POST',
-          //   body: 'adad'
-          // }).then(response => response.json().then(result => url = result ));
 
           newMessages.push({
             id: child.key,
@@ -100,11 +98,10 @@ export default () => {
           </>
         ) : (
           <>
-            <FormHelperText>{message.user}</FormHelperText>
+            <FormHelperText >{message.user}</FormHelperText>
             <img
               src={process.env.PUBLIC_URL + `${message.url}`}
-              style={{ maxWidth: "300px" }}
-            />
+              style={{ maxWidth: "300px" }} ref={ref} alt="pic" />
           </>
         )
       )}
