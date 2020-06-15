@@ -11,6 +11,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 export const mainListItems = (
   <div>
@@ -31,6 +32,12 @@ export const mainListItems = (
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Потеряшки" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <AddBoxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Добавить" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
