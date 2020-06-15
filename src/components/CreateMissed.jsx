@@ -52,7 +52,8 @@ export default () => {
             stuff: stuff,
             more: more,
             specificMarks: specificMarks,
-            time
+            time,
+            author: localStorage.getItem('userId')
           }),
         })
       ).json();

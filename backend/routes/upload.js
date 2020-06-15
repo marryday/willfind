@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require('path');
 const Poteryash = require('../models/poteryashSchema')
-
+const User = require('../models/userSchema')
 
 
 const fs = require('fs');
@@ -27,6 +27,7 @@ router.post('/missedperson', async (req, res) => {
   const firstName = fio[1];
   const lastName = fio[2];
   const middleName = fio[3];
+  const author = await User.findById(req.body.author)
 
   const poteryash = await new Poteryash({
     firstName,
@@ -42,9 +43,12 @@ router.post('/missedperson', async (req, res) => {
     SpecialSigns: req.body.specificMarks,
     thingsWith: req.body.stuff,
     image: req.body.img,
-    createdAt: new Date()
+    createdAt: new Date(),
+    author,
   })
   await poteryash.save();
+  author.searching.push(poteryash);
+  await author.save()
   res.json({ok: 'ok'})
 }catch(e) {
   console.error(e.message);

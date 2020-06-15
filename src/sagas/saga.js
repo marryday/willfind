@@ -23,6 +23,7 @@ const fetchLogin = async ({ email, password }) => {
     if (response) {
       localStorage.setItem("userSession", response.status);
       localStorage.setItem("userName", response.userSession.login);
+      localStorage.setItem('userId', response.userSession.id)
       return response;
     } else {
       alert("net nichego");
@@ -70,6 +71,7 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
       if (response) {
         localStorage.setItem("userSession", response.status);
         localStorage.setItem("userName", response.userSession.login);
+        localStorage.setItem('userId', response.userSession.id)
         return response;
       } else {
         alert("net nichego");

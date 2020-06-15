@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../models/userSchema");
+const  User  = require("../models/userSchema");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const bcrypt = require("bcrypt");

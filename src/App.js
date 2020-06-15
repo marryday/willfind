@@ -32,6 +32,9 @@ function App() {
       <Route exact path="/create">
         <CreateMissed />
       </Route>
+      <Route exact path="/profile">
+        <Profile />
+      </Route>
     </BrowserRouter>
   );
 }

@@ -19,6 +19,10 @@ const poteryashSchema = new mongoose.Schema({
   foundAt: { type: Date},
   foundLocationX: { type: String },
   foundLocationY: { type: String },
+  author: { 
+    type: mongoose.ObjectId,
+    ref: 'User'
+  },
 });
 
 module.exports = mongoose.model('Poteryash', poteryashSchema);
