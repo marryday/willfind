@@ -1,6 +1,7 @@
 import React from "react";
 //import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
+import createHistory from 'history/createBrowserHistory'
 // Пример thunk.
 // import getNewFox from './actionCreators/actionCreatorThunk';
 // Пример saga.
@@ -12,9 +13,10 @@ import Register from "./components/register";
 import Map from "./components/map";
 import Chat from "./components/Chat";
 import CreateMissed from "./components/CreateMissed";
+export const history = createHistory();
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <NavBar />
       <Route exact path="/"></Route>
       <Route exact path="/login">

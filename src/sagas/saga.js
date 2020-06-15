@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import actionTypes from "../redux/actionTypes";
+import {history} from '../App'
 import {
   loginFetch,
   logoutFetch,
@@ -89,6 +90,7 @@ function* loginPage(action) {
 
     const login = yield call(fetchLogin, { email: action.email, password: action.password });
     yield put(loginFetch(login));
+    history.push('/profile')
   } catch (error) {
     yield put(loadingError(error.message));
   }
@@ -99,6 +101,7 @@ function* logoutPage(action) {
     const logout = yield call(fetchLogout);
     console.log(logout);
     yield put(logoutFetch(logout));
+    history.push('/')
   } catch (error) {
     yield put(loadingError(error.message));
   }
@@ -109,6 +112,7 @@ function* registerPage(action) {
     const logout = yield call(fetchRegister, { name: action.name, email: action.email, password: action.password, repeadPassword: action.repeadPassword });
     console.log(logout);
     yield put(registerFetch(logout));
+    history.push('/profile')
   } catch (error) {
     yield put(loadingError(error.message));
   }
