@@ -9,8 +9,9 @@ import { Profile } from './components/user/Profile'
 import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
-import Map from "./components/map";
-import Chat from './components/Chat'
+import { MapComponent } from "./components/MapComponent";
+import Chat from "./components/Chat";
+import CreateMissed from "./components/CreateMissed";
 function App() {
   return (
     <BrowserRouter>
@@ -28,8 +29,8 @@ function App() {
       <Route exact path="/chat">
         <Chat />
       </Route>
-      <Route exact path="/profile">
-        <Profile />
+      <Route exact path="/create">
+        <CreateMissed />
       </Route>
     </BrowserRouter>
   );
