@@ -16,7 +16,7 @@ const app = express();
 
 // Подключаем mongoose.
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/p3-w1-d5-myGame', {
+mongoose.connect('mongodb://localhost:27017/WillFind', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
