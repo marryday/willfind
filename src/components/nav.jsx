@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { logoutSaga } from "../actionCreators/actionCreatorSaga";
 import Toogle from "./toogle";
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,19 +40,19 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton> */}
           <Typography variant="h6" className={classes.title}>
-            <Button href='/' color="inherit">Will find</Button>
+            <Link to='/' className="aNav">WILL FIND</Link>
           </Typography>
           {userSession ?
             <>
-              <Button href='/map' color="inherit">map</Button>
-              <Button href='/profile' color="inherit">{userName} </Button>
-              <Button href='/profile/logout' color="inherit" onClick={() => dispatch(logoutSaga())}>Logout</Button>
+              <Button><Link to='/map' className="aNav">MAP</Link></Button>
+              <Link to='/profile' className="aNav">{userName} </Link>
+              <Link to='/profile/logout' className="aNav" onClick={() => dispatch(logoutSaga())}>LOGOUT</Link>
               <Toogle />
 
             </> :
             <>
-              <Button href='/map' color="inherit">map</Button>
-              <Button href='/login' color="inherit">Login</Button>
+              <Button><Link to='/map' className="aNav">MAP</Link></Button>
+              <Button><Link to='/login' color="inherit" className="aNav">LOGIN</Link></Button>
               <Toogle />
 
             </>}

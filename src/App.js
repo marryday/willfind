@@ -9,8 +9,8 @@ import { Profile } from './components/user/Profile'
 import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
-import { MapComponent } from "./components/MapComponent";
-
+import Map from "./components/map";
+import Chat from './components/Chat'
 function App() {
   return (
     <BrowserRouter>
@@ -23,7 +23,10 @@ function App() {
         <Register />
       </Route>
       <Route exact path="/map">
-        <MapComponent />
+        <Map />
+      </Route>
+      <Route exact path="/chat">
+        <Chat />
       </Route>
       <Route exact path="/profile">
         <Profile />
