@@ -100,7 +100,7 @@ export default () => {
           <>
             <FormHelperText >{message.user}</FormHelperText>
             <img
-              src={process.env.PUBLIC_URL + `${message.url}`}
+              src={message.url}
               style={{ maxWidth: "300px" }} ref={ref} alt="pic" />
           </>
         )
