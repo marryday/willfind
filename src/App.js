@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 // import getNewFox from './actionCreators/actionCreatorThunk';
 // Пример saga.
 //import { loadImageSaga } from "./actionCreators/actionCreatorSaga";
+import { Profile } from './components/user/Profile'
 import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
@@ -26,6 +27,9 @@ function App() {
       </Route>
       <Route exact path="/chat">
         <Chat />
+      </Route>
+      <Route exact path="/profile">
+        <Profile />
       </Route>
     </BrowserRouter>
   );

@@ -45,7 +45,7 @@ export default function ButtonAppBar() {
           {userSession ?
             <>
               <Button><Link to='/map' className="aNav">MAP</Link></Button>
-              <Link to='#' className="aNav">{userName} </Link>
+              <Link to='/profile' className="aNav">{userName} </Link>
               <Link to='/profile/logout' className="aNav" onClick={() => dispatch(logoutSaga())}>LOGOUT</Link>
               <Toogle />
 
