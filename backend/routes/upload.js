@@ -17,6 +17,9 @@ router.post('/', (req,res) => {
   })
 })
 
+router.post('/missedperson', async (req, res) => {
+  console.log(req.body)
+})
 
 router.post('/url', async(req, res) => {
   console.log(req.body)
