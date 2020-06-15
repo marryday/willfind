@@ -25,7 +25,7 @@ const getPointOptions = () => {
   };
 };
 
-export function MapComponent() {
+export default function MapComponent() {
   return (
     <div className="AppMap">
       <YMaps>
