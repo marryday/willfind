@@ -9,7 +9,7 @@ import { Profile } from './components/user/Profile'
 import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
-import { MapComponent } from "./components/MapComponent";
+import Map from "./components/map";
 import Chat from "./components/Chat";
 import CreateMissed from "./components/CreateMissed";
 function App() {
