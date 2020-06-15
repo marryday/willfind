@@ -1,0 +1,24 @@
+const mongoose = require('mongoose');
+
+const poteryashSchema = new mongoose.Schema({
+  firstName: { type: String },
+  lastName: { type: String },
+  middleName: { type: String },
+  sex: { type: String},
+  birthDate: { type: Date },
+  addressOfLost: { type: String },
+  timeOfLost: { type: String },
+  aboutOfLost: { type: String },
+  health: { type: String },
+  clothes: { type: String },
+  specialSigns: { type: String},
+  thingsWith: { type: String},
+  image: { type: String, default: 'http://localhost:3000/no-photo.jpg' },
+  description: { type: String},
+  createdAt: { type: Date, required: true },
+  foundAt: { type: Date},
+  foundLocationX: { type: String },
+  foundLocationY: { type: String },
+});
+
+module.exports = mongoose.model('Poteryash', poteryashSchema);
