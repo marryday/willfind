@@ -1,106 +1,150 @@
 import React, { useEffect, useState, useRef } from "react";
 import firebase from "firebase";
-
+import TextField from "@material-ui/core/TextField";
+import Send from "@material-ui/icons/Send";
+import "./ChatStyle.css";
+import IconButton from "@material-ui/core/IconButton";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import { firebaseConfig } from "../FirebaseConfig";
+import { FormHelperText } from "@material-ui/core";
 export default () => {
   const address = document.location.href;
-
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const ref = useRef(null);
+
   useEffect(() => {
-    var firebaseConfig = {
-      apiKey: "AIzaSyDaW0bFssIk_RoDcPt1kpsR_BobFXT0tuQ",
-      authDomain: "findme-59c24.firebaseapp.com",
-      databaseURL: "https://findme-59c24.firebaseio.com",
-      projectId: "findme-59c24",
-      storageBucket: "findme-59c24.appspot.com",
-      messagingSenderId: "667423176876",
-      appId: "1:667423176876:web:68bc69f60dab12c3bf4709",
-    };
-
-    // Initialize Firebase
-
     firebase.initializeApp(firebaseConfig);
     getMessages();
   }, []);
 
   useEffect(() => {
-    const container = document.getElementById("chatview-container");
-    window.scrollTo(0, container.scrollHeight);
-    console.log('123')
-  });
+    ref.current && ref.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start"
+    });
+  }, [messages]);
 
-  //   const storageRef = firebase.storage().ref();
-  //   const imagesRef = storageRef.child('images');
-  //   const fileName = 'space.jpg'
-  //   const imageRef = imagesRef.child(fileName)
-  // const path = imageRef.fullPath
-  // const name = imageRef.name;
-
-  const getMessages = () => {
+  const getMessages = async () => {
     let messagesDB = firebase.database().ref(`${address}`);
     messagesDB.on("value", (snapshot) => {
       let newMessages = [];
       snapshot.forEach((child) => {
         let message = child.val();
-        newMessages.push({
-          id: child.key,
-          text: message.text,
-          user: message.me,
-        });
+        if (message.type === "text") {
+          newMessages.push({
+            id: child.key,
+            text: message.text,
+            user: message.user,
+          });
+        } else if (message.type === "file") {
+
+          newMessages.push({
+            id: child.key,
+            url: message.text,
+            user: message.user,
+          });
+        }
       });
       setMessages(newMessages);
     });
   };
 
-  const writeMessageToDb = (message) => {
-    firebase.database().ref(`${address}`).push({
-      text: message,
-      user: "me",
-    });
+  const writeMessageToDb = (message, type) => {
+    firebase
+      .database()
+      .ref(`${address}`)
+      .push({
+        text: message,
+        user: localStorage.getItem("userName"),
+        type: type,
+      });
   };
-  const styleInput = {
-    position: "fixed",
-    left: "0",
-    bottom: "0",
-    padding: "10",
+
+  const uploadPhoto = (event) => {
+    const file = event.target.files[0];
+    const uploadTask = firebase.storage().ref(`/images/${file.name}`).put(file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapShot) => {
+        console.log(snapShot);
+      },
+      (err) => {
+        console.log(err);
+      },
+      () =>
+        firebase
+          .storage()
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((firebaseUrl) => {
+            writeMessageToDb(firebaseUrl, "file");
+          })
+    );
   };
-  const styleButton = {
-      position: "fixed",
-      left: '200px',
-      bottom: "0",
-      padding: "10",
-    };
-  
-  // const [input, setInput] = useState("");
-  // const [messages, setMessages] = useState([]);
-  // const [container, setContainer] = useState(document.getElementById('chatview-container'))
-  // if(container) setContainer(document.getElementById('chatview-container').scrollTo(0, container.scrollHeight))
+
   return (
-    <div className="chat" id="chatview-container">
-      {messages.map((message) => (
-        <p key={message.id}> {message.text}</p>
-      ))}
-      <input
-        placeholder="Type something..."
-        onChange={(e) => setInput(e.target.value)}
-        type="text"
-        value={input}
-        style={styleInput}
-        onKeyPress={(e) => {
-          if (e.charCode === 13 && input.trim() !== "") {
-            setMessages([...messages, input]);
-            writeMessageToDb(input);
-            setInput("");
-          }
-        }}
-      ></input>
-      <input
-        style={styleButton}
-        type="file"
-        name="myFile"
-        onSubmit={(file) => console.log(file.filename())}
-      />
+    <div className="chat">
+      {messages.map((message) =>
+        message.text ? (
+          <>
+            <FormHelperText>{message.user}</FormHelperText>
+            <p key={message.id} ref={ref}>
+              {message.text}
+            </p>
+          </>
+        ) : (
+          <>
+            <FormHelperText >{message.user}</FormHelperText>
+            <img
+              src={message.url}
+              style={{ maxWidth: "300px" }} ref={ref} alt="pic" />
+          </>
+        )
+      )}
+      <div className="inputChat">
+        <TextField
+          placeholder="Type something..."
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
+          value={input}
+          onKeyPress={(e) => {
+            if (e.charCode === 13 && input.trim() !== "") {
+              setMessages([...messages, input]);
+              writeMessageToDb(input, "text");
+              setInput("");
+            }
+          }}
+        ></TextField>
+        <Send
+          onClick={() => {
+            if (input.trim() !== "") {
+              setMessages([...messages, input]);
+              writeMessageToDb(input, "text");
+              setInput("");
+            }
+          }}
+          className="sendBtn"
+        />
+        <input
+          style={{ display: "none" }}
+          type="file"
+          id="icon-button-file"
+          onChange={(event) => uploadPhoto(event)}
+        />
+        <label htmlFor="icon-button-file">
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+          >
+            <PhotoCamera />
+          </IconButton>
+        </label>
+      </div>
     </div>
   );
 };

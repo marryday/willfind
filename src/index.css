@@ -11,3 +11,49 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.mainMapComponent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.aNav{
+  color: white;
+  margin: 10px;
+}
+
+.aNav:hover{
+  text-decoration: none;
+  color: white;
+}
+
+.mapBtn{
+  color: white;
+}
+
+.mapBtn:hover{
+  text-decoration: none;
+  color: white;
+}
+
+.mainMapComponent{
+  padding: 10px;
+}
+
+.btnTwo{
+  margin-bottom: 15px;
+}
+
+.AppMap{
+  border: black solid 2px;
+  border-radius: 6px;
+}
+
+.homePage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
