@@ -57,3 +57,35 @@ code {
   justify-content: center;
   flex-direction: column;
 }
+
+.mainListFind{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: center;
+}
+
+.oneListFind{
+  display: flex;
+  height: 180px;
+  width: 500px;
+  border: blue solid 2px;
+  margin: 20px;
+}
+
+.oneListFind img{
+  width:100px;
+  height: 130px;
+  margin: 10px ;
+}
+
+.btnListFind{
+  position: absolute;
+  align-self: flex-end;
+  right: 10px; 
+}
+
+.dataListFind{
+  position: absolute;
+  right: 15px; 
+}
