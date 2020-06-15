@@ -45,7 +45,7 @@ export default function ButtonAppBar() {
           {userSession ?
             <>
               <Button href='/map' color="inherit">map</Button>
-              <Button href='#' color="inherit">{userName} </Button>
+              <Button href='/profile' color="inherit">{userName} </Button>
               <Button href='/profile/logout' color="inherit" onClick={() => dispatch(logoutSaga())}>Logout</Button>
               <Toogle />
 
