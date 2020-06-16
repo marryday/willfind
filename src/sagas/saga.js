@@ -1,4 +1,4 @@
-import { call, put, takeEvery} from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import actionTypes from "../redux/actionTypes";
 import history from '../heplers/history'
 import {
@@ -8,8 +8,8 @@ import {
   loadingStart,
   loadingError,
 } from "../actionCreators/actionCreatorSaga";
-import {addPoint} from "../redux/actions";
-import {ADD_POINT} from "../redux/types";
+import { addPoint } from "../redux/actions";
+import { ADD_POINT } from "../redux/types";
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
@@ -116,7 +116,7 @@ function* loginPage(action) {
 
     const login = yield call(fetchLogin, { email: action.email, password: action.password });
     yield put(loginFetch(login));
-   yield put( history.push('/profile'))
+    yield put(history.push('/profile'))
   } catch (error) {
     yield put(loadingError(error.message));
   }
@@ -149,7 +149,7 @@ function* registerPage(action) {
 function* addPointFetch(action) {
   try {
     const coordinates = yield call(getFetchSearchQuery(action)) //[latitude, longitude]
-    const obj = {coordinates: coordinates, userId: action.userId}
+    const obj = { coordinates: coordinates, userId: action.userId }
   } catch (error) {
     yield put(loadingError(error.message));
   }
