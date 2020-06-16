@@ -21,11 +21,13 @@ const mapState = {
   coordinates: []
 };
 
-const getPointData = index => {
-  console.log('index',index)
+const getPointData = (name, profileLink) => {
+  console.log('name',name)
   return {
-    balloonContentBody: " <strong> " + index + "</strong>",
-    clusterCaption: "placemark <strong>" + index + "</strong>"
+    balloonContentBody: `
+     <strong>1111 ${name}  </strong>
+       <a>${profileLink}</a>`,
+    clusterCaption: ` <strong> 2222 ${name}  </strong>`
   };
 };
 
@@ -79,7 +81,7 @@ export function MapComponent() {
                 return <Placemark
                   key={idx}
                   geometry={{coordinates:objUser.coordinates}}
-                  properties={getPointData(objUser.userNAme)}
+                  properties={getPointData(objUser.name, objUser.profileLink)}
                   options={getPointOptions()}
                 />
               })}
