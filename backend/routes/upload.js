@@ -66,7 +66,8 @@ router.get('/missedpeople' , async (req, res) => {
 })
 
 router.patch('/coordinates', async(req, res) => {
-  console.log(req.body)
+  const poteryash = await Poteryash.findById(req.body.id);
+  poteryash
 })
 module.exports = router;
 
