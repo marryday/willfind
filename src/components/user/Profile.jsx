@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,6 +23,8 @@ import { mainListItems, secondaryListItems } from './profileHelpers/listItems';
 import Chart from './profileHelpers/Chart';
 import Deposits from './profileHelpers/Deposits';
 import Orders from './profileHelpers/Orders';
+import CreateMissed from '../CreateMissed';
+
 
 function Copyright() {
   return (
@@ -120,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
 export const Profile = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const state = useSelector((state) => state);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -161,7 +165,7 @@ export const Profile = () => {
       >
 
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={ open ? handleDrawerClose : handleDrawerOpen}>
+          <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
@@ -197,6 +201,7 @@ export const Profile = () => {
             <Copyright />
           </Box>
         </Container>
+        <CreateMissed />
       </main>
     </div>
   );

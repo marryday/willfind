@@ -69,7 +69,6 @@ code {
   display: flex;
   height: 180px;
   width: 500px;
-  border: blue solid 2px;
   margin: 20px;
 }
 
@@ -89,3 +88,5 @@ code {
   position: absolute;
   right: 15px; 
 }
+
+

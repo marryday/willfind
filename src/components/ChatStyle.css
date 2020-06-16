@@ -1,18 +1,11 @@
-::-webkit-scrollbar { /* chrome based */
+ ::-webkit-scrollbar { /* chrome based */
   width: 0px;  /* ширина scrollbar'a */
   background: transparent;  /* опционально */
-}
+} 
 
 .sendBtn {
   color: blue;
   cursor: pointer;
-}
-
-.inputChat {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  padding: 10px;
 }
 
 .chat {
@@ -21,8 +14,62 @@
   overflow: hidden;
   overflow-y: scroll;
   max-height: 400px;
-  max-width: 600px;
+  width: 800px;
   -ms-overflow-style: none;  /* IE 10+ */
   scrollbar-width: none; 
+  margin: 15px;
+} 
+
+.firstFindPeople{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
+.descriptionPeople{
+  display: flex;
+  flex-direction: row;
+  width:800px;
+  margin: 15px;
+}
+
+.fotoFindPeople img{
+  margin: 10px;
+  height:300px;
+}
+
+.sendPost{
+  margin: 15px;
+}
+.inputChat{
+  margin: 15px;
+  align-content: center;
+}
+
+.inputChat form{
+  display: flex;
+  flex-direction: row;
+}
+.inputAndSend{
+  align-self: flex-end;
+}
+
+/* .comment {
+  background: #e8e8e8;
+  text-align: start;
+  margin: 3px;
+}
+.comment div {
+  background: white;
+  display: inline-block;
+  width: 790px;
+  margin: 2px;
+  box-shadow: 0 5px 7px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
+  padding: 5px;
+}
+
+.comment div img{
+  margin: 7px;
+} */
