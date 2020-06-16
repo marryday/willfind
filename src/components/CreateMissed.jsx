@@ -66,7 +66,7 @@ export default () => {
           }),
         })
       ).json();
-      dispatch(addPoint(searchQuery));
+      dispatch(addPoint(searchQuery, result._id));
       // if (result.ok === "ok") {
       //   history.goBack();
       // }

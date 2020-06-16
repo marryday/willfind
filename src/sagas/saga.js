@@ -98,16 +98,16 @@ const getFetchSearchQuery = async (searchQuery) => {
     const latitude = coordinates[1]
     const longitude = coordinates[0]
 
-    console.log('result', result)
-    console.log('coordinates', coordinates)
-    console.log('latitude', latitude)
-    console.log('longitude', longitude)
+    // console.log('result', result)
+    // console.log('coordinates', coordinates)
+    // console.log('latitude', latitude)
+    // console.log('longitude', longitude)
     // let placemark = new YMaps.Placemark([latitude, longitude], {})
     // if (coordinates) Map.geoObjects.add(placemark);
     return [latitude, longitude];
   }
   catch (error) {
-
+    console.error(error.message)
   }
 }
 
@@ -146,7 +146,7 @@ function* registerPage(action) {
   }
 }
 
-const fetchPutCoordinates = async ({id, coordinates}) => {
+const fetchPutCoordinates = async (obj) => {
   return await (
     await fetch("/upload/coordinates", {
       method: "PATCH",
@@ -154,8 +154,8 @@ const fetchPutCoordinates = async ({id, coordinates}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id,
-        coordinates
+       id: obj.userId,
+      coordinates: obj.coordinates
       }),
     })
   ).json();
@@ -165,8 +165,8 @@ const fetchPutCoordinates = async ({id, coordinates}) => {
 function* addPointFetch(action) {
   try {
     debugger
-    const coordinates = yield call(getFetchSearchQuery(action)) //[latitude, longitude]
-    const obj = { coordinates: coordinates, userId: action.userId }
+    const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
+    const obj = { coordinates: coordinates, userId: action.id }
     
     const updated = yield call(fetchPutCoordinates, obj )
    

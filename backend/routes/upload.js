@@ -49,7 +49,7 @@ router.post('/missedperson', async (req, res) => {
   await poteryash.save();
   author.searching.push(poteryash);
   await author.save()
-  res.json({ok: 'ok'})
+  res.json(poteryash)
 }catch(e) {
   console.error(e.message);
   return res.status(500).send(e)
