@@ -32,7 +32,7 @@ const getPointOptions = () => {
   };
 };
 
-export function MapComponent() {
+export default function MapComponent() {
   const dispatch = useDispatch();
   const [searchQuery, SetSearchQuery] = useState('')
 
