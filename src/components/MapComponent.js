@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 import ReactDOM from "react-dom";
-import { YMaps, Map, Clusterer, Placemark } from "../ymaps";
+import {YMaps, Map, Clusterer, Placemark} from "../ymaps";
 
 import points from "./points.json";
+import testPoints from './testPoints.json'
+
 import Button from "@material-ui/core/Button";
-import { addPoint } from "../redux/actions";
+import {addPoint} from "../redux/actions";
 
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
@@ -19,10 +21,13 @@ const mapState = {
   coordinates: []
 };
 
-const getPointData = index => {
+const getPointData = (name, profileLink) => {
+  console.log('name',name)
   return {
-    balloonContentBody: "acemark <strong>balloon " + index + "</strong>",
-    clusterCaption: "placemark <strong>" + index + "</strong>"
+    balloonContentBody: `
+     <strong>1111 ${name}  </strong>
+       <a>${profileLink}</a>`,
+    clusterCaption: ` <strong> 2222 ${name}  </strong>`
   };
 };
 
@@ -62,23 +67,32 @@ export default function MapComponent() {
                 geoObjectHideIconOnBalloonOpen: false
               }}
             >
-              {points.map((coordinates, idx) => (
-                <Placemark
+              {/*{points.map((coordinates, idx) => {*/}
+              {/*  console.log(coordinates)*/}
+              {/*  return <Placemark*/}
+              {/*    key={idx}*/}
+              {/*    geometry={{coordinates}}*/}
+              {/*    properties={getPointData(idx)}*/}
+              {/*    options={getPointOptions()}*/}
+              {/*  />*/}
+              {/*})}*/}
+
+              {testPoints.length > 0 && testPoints.map((objUser, idx) => {
+                return <Placemark
                   key={idx}
-                  geometry={{ coordinates }}
-                  properties={getPointData(idx)}
+                  geometry={{coordinates:objUser.coordinates}}
+                  properties={getPointData(objUser.name, objUser.profileLink)}
                   options={getPointOptions()}
                 />
-              ))}
+              })}
             </Clusterer>
           </Map>
         </YMaps>
       </div>
       <form onSubmit={(event) => {
         event.preventDefault();
-        dispatch(addPoint(searchQuery))
-      }}>
-        <input type='text' name='inputСoordinates' onChange={handleInput} />
+        dispatch(addPoint(searchQuery))}}>
+        <input type='text' name='inputСoordinates' onChange={handleInput}/>
         <Button variant="contained" color="primary" type='submit'>
           Добавить точку
         </Button>
