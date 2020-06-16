@@ -51,8 +51,9 @@ export default function ButtonAppBar() {
 
             </> :
             <>
-              <Button><Link to='/map' className="aNav">MAP</Link></Button>
-              <Button><Link to='/login' color="inherit" className="aNav">LOGIN</Link></Button>
+              <Button href='/map' color="inherit">map</Button>
+              <Button href='/map2' color="inherit">mapTwoVersion</Button>
+              <Button href='/login' color="inherit">Login</Button>
               <Toogle />
 
             </>}

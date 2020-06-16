@@ -17,7 +17,11 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+<<<<<<< HEAD
     "recharts": "^1.8.5",
+=======
+    "react-yandex-maps": "^4.4.0",
+>>>>>>> 9cd001b58e8239f082e7fc9fe0e88a7c2d9c090c
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3"
   },

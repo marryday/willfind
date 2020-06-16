@@ -1,0 +1,1 @@
+export const ADD_POINT = 'MAP/ADD_POINT';
