@@ -1,0 +1,26 @@
+[
+  {
+    "coordinates": [
+      55.831903,
+      37.411961
+    ],
+    "name": "Маша",
+    "profileLink": "http://localhost:3000/potersiaski/1"
+  },
+  {
+    "coordinates": [
+      55.763338,
+      37.565466
+    ],
+    "name": "Petya",
+    "profileLink": "http://localhost:3000/potersiaski/2"
+  },
+  {
+    "coordinates": [
+      55.744522,
+      37.616378
+    ],
+    "name": "Ksenya",
+    "profileLink": "http://localhost:3000/potersiaski/3"
+  }
+]
