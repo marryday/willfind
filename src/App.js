@@ -9,7 +9,7 @@ import { Profile } from "./components/user/Profile";
 import NavBar from "./components/nav";
 import Login from "./components/Login";
 import Register from "./components/register";
-import { MapComponent } from "./components/MapComponent";
+import Map from "./components/map";
 import { MapComponent2 } from "./components/MapComponent2";
 import { NotFound404 } from "./components/NotFound404";
 import History from "./heplers/history"
@@ -27,7 +27,7 @@ function App() {
         <Register />
       </Route>
       <Route exact path="/map">
-        <MapComponent />
+        <Map />
       </Route>
       <Route exact path="/map2">
         <MapComponent2 />
