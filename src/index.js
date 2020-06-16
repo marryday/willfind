@@ -10,16 +10,17 @@ import saga from "./sagas/saga";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers/reducer.js";
+import {rootReducer} from "./redux/rootReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = compose(
   applyMiddleware(sagaMiddleware),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-
-const store = createStore(reducer, enhancers);
+const store = createStore(rootReducer , enhancers);
 
 sagaMiddleware.run(saga);
+
 
 ReactDOM.render(
   <React.StrictMode>
