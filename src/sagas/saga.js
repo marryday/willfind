@@ -87,6 +87,8 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
   }
 }
 
+
+
 const getFetchSearchQuery = async (searchQuery) => {
   // console.log( 'searchQuery',searchQuery)
   try {
@@ -144,12 +146,31 @@ function* registerPage(action) {
   }
 }
 
+const fetchPutCoordinates = async ({id, coordinates}) => {
+  return await (
+    await fetch("/upload/coordinates", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        coordinates
+      }),
+    })
+  ).json();
+};
 
 
 function* addPointFetch(action) {
   try {
+    debugger
     const coordinates = yield call(getFetchSearchQuery(action)) //[latitude, longitude]
     const obj = { coordinates: coordinates, userId: action.userId }
+    
+    const updated = yield call(fetchPutCoordinates, obj )
+   
+    console.log(updated)
   } catch (error) {
     yield put(loadingError(error.message));
   }

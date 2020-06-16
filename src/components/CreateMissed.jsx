@@ -1,8 +1,11 @@
-import React, { useState} from "react";
-import {useHistory} from 'react-router'
-
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import Button from "@material-ui/core/Button";
+import { addPoint } from "../redux/actions";
 export default () => {
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [authorName, setAuthorName] = useState("");
   const [authorTel, setTel] = useState("");
   const [name, setName] = useState("");
@@ -18,6 +21,12 @@ export default () => {
   const [stuff, setStuff] = useState("");
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
+
+  const [searchQuery, SetSearchQuery] = useState("");
+
+  const handleInput = (event) => {
+    SetSearchQuery(event.target.value);
+  };
 
   const submitHandler = async (e) => {
     console.log("123");
@@ -53,13 +62,14 @@ export default () => {
             more: more,
             specificMarks: specificMarks,
             time,
-            author: localStorage.getItem('userId')
+            author: localStorage.getItem("userId"),
           }),
         })
       ).json();
-     if(result.ok === 'ok'){
-       history.goBack()
-     }
+      dispatch(addPoint(searchQuery));
+      // if (result.ok === "ok") {
+      //   history.goBack();
+      // }
     } catch (e) {
       console.error(e.message);
     }
@@ -124,11 +134,7 @@ export default () => {
         onChange={(e) => setBirthday(e.target.value)}
       ></input>
       <p>Адрес пропажи</p>
-      <input
-        type="text"
-        name="address"
-        onChange={(e) => setLocation(e.target.value)}
-      ></input>
+      <input type="text" name="inputСoordinates" onChange={handleInput} />
       <p>Местность пропажи</p>
       <input
         type="text"
@@ -184,9 +190,15 @@ export default () => {
         name="more"
         onChange={(e) => setMore(e.target.value)}
       />
-      <button type="button" onClick={(e) => submitHandler(e)}>
+      <p></p>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(e) => submitHandler(e)}
+      >
         Создать
-      </button>
+      </Button>
     </div>
   );
 };

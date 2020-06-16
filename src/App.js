@@ -7,7 +7,8 @@ import Register from "./components/register";
 import Map from "./components/map";
 import { NotFound404 } from "./components/NotFound404";
 import History from "./heplers/history"
-
+import PoteryashList from './components/PoteryshList'
+import CreateMissed from './components/CreateMissed'
 
 function App() {
   return (
@@ -25,6 +26,12 @@ function App() {
       </Route>
       <Route exact path="/profile">
         <Profile />
+      </Route>
+      <Route exact path="/poteryash">
+        <PoteryashList/>
+      </Route>
+      <Route exact path="/create">
+        <CreateMissed />
       </Route>
       <Route path="/404">
         <NotFound404 />

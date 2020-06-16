@@ -24,9 +24,9 @@ router.post('/missedperson', async (req, res) => {
   console.log(req.body)
   try{
   const fio = req.body.name.split(' ')
-  const firstName = fio[1];
+  const firstName = fio[0];
+  const middleName= fio[1];
   const lastName = fio[2];
-  const middleName = fio[3];
   const author = await User.findById(req.body.author)
 
   const poteryash = await new Poteryash({
@@ -56,6 +56,18 @@ router.post('/missedperson', async (req, res) => {
 }
 })
 
+router.get('/missedpeople' , async (req, res) => {
+  try{
+  let ppl = await Poteryash.find();
+  res.json({ppl})
+  }catch(e) {
+    res.status(500).json(e)
+  }
+})
+
+router.patch('/coordinates', async(req, res) => {
+  console.log(req.body)
+})
 module.exports = router;
 
 
