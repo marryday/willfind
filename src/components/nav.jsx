@@ -52,7 +52,7 @@ export default function ButtonAppBar() {
             </> :
             <>
               <Button href='/map' color="inherit">map</Button>
-              <Button href='/map2' color="inherit">mapTwoVersion</Button>
+              <Button href='/ClickMapGetLocation' color="inherit">ClickMapGetLocation</Button>
               <Button href='/login' color="inherit">Login</Button>
               <Toogle />
 

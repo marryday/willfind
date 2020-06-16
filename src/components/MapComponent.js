@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import {YMaps, Map, Clusterer, Placemark} from "../ymaps";
 
 import points from "./points.json";
+import testPoints from './testPoints.json'
+
 import Button from "@material-ui/core/Button";
 import {addPoint} from "../redux/actions";
 
@@ -20,8 +22,9 @@ const mapState = {
 };
 
 const getPointData = index => {
+  console.log('index',index)
   return {
-    balloonContentBody: "acemark <strong>balloon " + index + "</strong>",
+    balloonContentBody: " <strong> " + index + "</strong>",
     clusterCaption: "placemark <strong>" + index + "</strong>"
   };
 };
@@ -62,14 +65,24 @@ export function MapComponent() {
                 geoObjectHideIconOnBalloonOpen: false
               }}
             >
-              {points.map((coordinates, idx) => (
-                <Placemark
+              {/*{points.map((coordinates, idx) => {*/}
+              {/*  console.log(coordinates)*/}
+              {/*  return <Placemark*/}
+              {/*    key={idx}*/}
+              {/*    geometry={{coordinates}}*/}
+              {/*    properties={getPointData(idx)}*/}
+              {/*    options={getPointOptions()}*/}
+              {/*  />*/}
+              {/*})}*/}
+
+              {testPoints.length > 0 && testPoints.map((objUser, idx) => {
+                return <Placemark
                   key={idx}
-                  geometry={{coordinates}}
-                  properties={getPointData(idx)}
+                  geometry={{coordinates:objUser.coordinates}}
+                  properties={getPointData(objUser.userNAme)}
                   options={getPointOptions()}
                 />
-              ))}
+              })}
             </Clusterer>
           </Map>
         </YMaps>

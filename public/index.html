@@ -3,6 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=<ваш API-ключ>&lang=ru_RU=<ac85ebda-7107-4441-88aa-069cf0857ea8>" defer type="text/javascript"></script>
+    <script src='../src/components/ClickMapGetLocation.js' defer type="text/javascript"></script>
+    <style type="text/css">
+      html, body {
+        width: 100%;
+        height: 95%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial;
+        font-size: 14px;
+      }
+      #map {
+        width: 100%;
+        height: 95%;
+      }
+      .header {
+        padding: 5px;
+      }
+    </style>
+
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -41,5 +64,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <div id="map"></div>
   </body>
 </html>

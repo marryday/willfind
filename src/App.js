@@ -11,6 +11,7 @@ import Register from "./components/register";
 import {MapComponent} from "./components/MapComponent";
 import {MapComponent2} from "./components/MapComponent2";
 import {NotFound404} from "./components/NotFound404";
+import ClickMapGetLocation from "./components/ClickMapGetLocation";
 
 
 function App() {
@@ -27,9 +28,9 @@ function App() {
         <Route exact path="/map">
           <MapComponent/>
         </Route>
-        <Route exact path="/map2">
-          <MapComponent2/>
-        </Route>
+      <Route exact path="/ClickMapGetLocation">
+        <ClickMapGetLocation/>
+      </Route>
         <Route exact path="/404">
           <NotFound404/>
         </Route>
