@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { addPoint } from "../redux/actions";
+import CropForm from './Avatar'
+import './AvatarStyle.css'
 export default () => {
+  const url = useSelector(state => state.reducer.src)
   const dispatch = useDispatch();
   const history = useHistory();
   const [authorName, setAuthorName] = useState("");
@@ -21,7 +24,7 @@ export default () => {
   const [stuff, setStuff] = useState("");
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
-  const [filePath, setFilePath] = useState('');
+  // const [filePath, setFilePath] = useState('');
 
   const [searchQuery, SetSearchQuery] = useState("");
 
@@ -34,16 +37,18 @@ export default () => {
   const submitHandler = async (e) => {
     console.log("123");
     try {
-      const formData = new FormData();
-      formData.append("file", img);
-      const res = await (
-        await fetch("/upload", {
-          method: "POST",
-          body: formData,
-        })
-      ).json()
-      setFilePath(res.filePath)
-      debugger
+
+
+      // const formData = new FormData();
+      // formData.append("file", img);
+      // const res = await (
+      //   await fetch("/upload", {
+      //     method: "POST",
+      //     body: formData,
+      //   })
+      // ).json()
+
+
       const result = await (
         await fetch("/upload/missedperson", {
           method: "POST",
@@ -57,7 +62,7 @@ export default () => {
             terrain: terrain,
             location: location,
             gender: gender,
-            img: filePath,
+            img: url,
             birthday: birthday,
             description: description,
             health: health,
@@ -182,20 +187,14 @@ export default () => {
         onChange={(e) => setStuff(e.target.value)}
       />
       <p> Фотография пропавшего </p>
-      <input
-        type="file"
-        onChange={(e) => {
-          setImg(e.target.files[0])
-          console.log(img)
-        }}
-      />
+      <CropForm onChange={console.log(CropForm.dataUrl)} />
       <p>Дополнительная информация</p>
       <input
         type="text"
         name="more"
         onChange={(e) => setMore(e.target.value)}
       />
-      <p></p>
+
 
       <Button
         variant="contained"

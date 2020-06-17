@@ -15,6 +15,7 @@ const profileRouter = require('./routes/profile');
 
 
 const app = express();
+const bodyParser = require('body-parser')
 
 
 // Подключаем mongoose.
@@ -30,8 +31,9 @@ mongoose.connect('mongodb://localhost:27017/WillFind', {
 //hbs.registerPartials(path.join(__dirname, 'templates', 'partials'));
 
 app.use(logger('dev'));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
