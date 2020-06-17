@@ -5,7 +5,7 @@ const poteryashSchema = new mongoose.Schema({
   lastName: { type: String },
   middleName: { type: String },
   sex: { type: String},
-  birthDate: { type: Date },
+  birthDate: { type: String },
   addressOfLost: { type: String },
   timeOfLost: { type: String },
   aboutOfLost: { type: String },
