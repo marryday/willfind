@@ -40,26 +40,25 @@ const fetchLogin = async ({ email, password }) => {
 };
 
 const fetchLogout = async () => {
-  try {
-    const response = await fetch(`/profile/logout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        //charset=utf-8",
-      },
-    });
-    const result = await response.json();
-    console.log(result)
+  //try {
+  const response = await fetch(`/profile/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  console.log(result)
 
-    if (response.status) {
-      localStorage.clear();
-      return false;
-    } else {
-      alert("net nichego");
-    }
-  } catch (e) {
-    console.message("Ошибка, сервер недоступен", e);
+  if (response.status) {
+    localStorage.clear();
+    return false;
+  } else {
+    alert("net nichego");
   }
+  //} catch (e) {
+  // console.message("Ошибка, сервер недоступен", e);
+  // }
 }
 
 const fetchRegister = async ({ name, email, password, repeadPassword }) => {
@@ -134,7 +133,7 @@ function* logoutPage(action) {
     const logout = yield call(fetchLogout);
     console.log(logout);
     yield put(logoutFetch(logout));
-    yield put(history.push('/'))
+    //yield put(history.push('/'))
   } catch (error) {
     yield put(loadingError(error.message));
   }

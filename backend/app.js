@@ -12,7 +12,10 @@ const bcrypt = require('bcrypt');
 const cors = require("cors")
 const uploadRouter = require('./routes/upload')
 const profileRouter = require('./routes/profile');
+
+
 const app = express();
+
 
 // Подключаем mongoose.
 const mongoose = require('mongoose');
@@ -37,7 +40,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload()); //возможность загружать файлы
 
 //--------------------------------------
-app.use(cors());
+//app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000"],
+    optionsSuccessStatus: 200
+  })
+);
 
 app.use(
   session({

@@ -168,7 +168,7 @@ router.post("/session", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  console.log("Да чувакб ты здесь")
+  console.log("Да чувак, ты здесь")
   req.session.destroy();
   res.json({ status: true });
 });
