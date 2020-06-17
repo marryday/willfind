@@ -21,12 +21,15 @@ export default () => {
   const [stuff, setStuff] = useState("");
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
+  const [filePath, setFilePath] = useState('');
 
   const [searchQuery, SetSearchQuery] = useState("");
 
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
   };
+
+
 
   const submitHandler = async (e) => {
     console.log("123");
@@ -38,8 +41,9 @@ export default () => {
           method: "POST",
           body: formData,
         })
-      ).json();
-
+      ).json()
+      setFilePath(res.filePath)
+      debugger
       const result = await (
         await fetch("/upload/missedperson", {
           method: "POST",
@@ -53,7 +57,7 @@ export default () => {
             terrain: terrain,
             location: location,
             gender: gender,
-            img: res.filePath,
+            img: filePath,
             birthday: birthday,
             description: description,
             health: health,
@@ -67,12 +71,13 @@ export default () => {
         })
       ).json();
       dispatch(addPoint(searchQuery, result._id));
+    } catch(e){
+        console.error(e.message)
+    }
       // if (result.ok === "ok") {
       //   history.goBack();
       // }
-    } catch (e) {
-      console.error(e.message);
-    }
+    
   };
   return (
     <div
@@ -180,8 +185,8 @@ export default () => {
       <input
         type="file"
         onChange={(e) => {
-          e.preventDefault();
-          setImg(e.target.files[0]);
+          console.log(img)
+          setImg(e.target.files[0])
         }}
       />
       <p>Дополнительная информация</p>

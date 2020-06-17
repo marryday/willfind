@@ -10,6 +10,7 @@ import {
 } from "../actionCreators/actionCreatorSaga";
 import { addPoint } from "../redux/actions";
 import { ADD_POINT } from "../redux/types";
+import {putCoordinates} from '../redux/actions'
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
@@ -161,16 +162,25 @@ const fetchPutCoordinates = async (obj) => {
   ).json();
 };
 
+const fetchMissedPpl = async () => {
+  return await(await fetch('/upload/missedpeople', {
+    method: 'GET',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+  })).json()
+}
 
 function* addPointFetch(action) {
   try {
-    debugger
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
     const obj = { coordinates: coordinates, userId: action.id }
     
     const updated = yield call(fetchPutCoordinates, obj )
-   
-    console.log(updated)
+    const poteryashes = yield call(fetchMissedPpl);
+    debugger
+    yield put(putCoordinates(poteryashes))
+    console.log(poteryashes)
   } catch (error) {
     yield put(loadingError(error.message));
   }
