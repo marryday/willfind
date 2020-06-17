@@ -1,4 +1,4 @@
-import {ADD_POINT, PUT_COORDINATES} from "./types";
+import {ADD_POINT, PUT_COORDINATES, SET_IMAGE} from "./types";
 
 export function addPoint(payload, id) {
   return {
@@ -13,4 +13,8 @@ export function putCoordinates(payload){
     type: PUT_COORDINATES,
     payload: payload,
   }
+}
+
+export function setImage(payload){
+  return{ type: SET_IMAGE, src: payload}
 }

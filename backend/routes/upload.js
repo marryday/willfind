@@ -28,7 +28,7 @@ router.post("/missedperson", async (req, res) => {
     const middleName = fio[2];
     const lastName = fio[0];
     const author = await User.findById(req.body.author);
-
+    console.log(req.body.url)
     const poteryash = await new Poteryash({
       firstName,
       lastName,
