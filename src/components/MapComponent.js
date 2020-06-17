@@ -7,7 +7,7 @@ import testPoints from './testPoints.json'
 
 import Button from "@material-ui/core/Button";
 import { addPoint } from "../redux/actions";
-import { setState } from '../redux/actions'
+import { setSagaState } from '../redux/actions'
 
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
@@ -63,10 +63,10 @@ export default function MapComponent() {
 
   // const useFetching = (someFetchActionCreator) => {
   //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(setState())
-  //   }, [])
-  // }
+  useEffect(() => {
+    dispatch(setSagaState())
+  }, [])
+
   // useFetching()
   // useEffect(() => {
   //   dispatch(obj);
