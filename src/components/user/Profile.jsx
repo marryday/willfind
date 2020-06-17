@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -127,6 +128,7 @@ const useStyles = makeStyles((theme) => ({
 export const Profile = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const state = useSelector((state) => state);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -259,6 +261,7 @@ export const Profile = () => {
             {poteryashki ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Map /></Paper></Grid> : null}
           </Grid>
         </Container>
+        <CreateMissed />
       </main>
     </div>
   );
