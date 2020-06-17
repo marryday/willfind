@@ -1,5 +1,5 @@
 import React from 'react';
-import {ProfileInfo} from './ProfileInfo'
+import { ProfileInfo } from './ProfileInfo'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -13,27 +13,27 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
-export const mainListItems = (
+export const mainListItems = (props) => (
   <div>
-    <ListItem button>
+    <ListItem button onClick={() => props.handleOpenDashboard()}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Сводка" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => props.handleOpenNewOne()}>
       <ListItemIcon>
         <DirectionsWalkIcon />
       </ListItemIcon>
       <ListItemText primary="Новые" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => props.handleOpenPoteryashki()}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Потеряшки" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => props.handleOpenAddNew()}>
       <ListItemIcon>
         <AddBoxIcon />
       </ListItemIcon>
@@ -45,13 +45,13 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Статистика" />
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Общение" />
-    </ListItem>
-    <ListItem button>
+    </ListItem> */}
+    <ListItem button onClick={() => props.handleOpenYourData()}>
       <ListItemIcon>
         <AccountBoxIcon />
       </ListItemIcon>

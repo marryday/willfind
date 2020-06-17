@@ -12,6 +12,7 @@ import Register from "./components/register";
 import Map from "./components/map";
 import Chat from "./components/Chat";
 import CreateMissed from "./components/CreateMissed";
+import Checkout from './components/user/profileHelpers/yourData/Checkout';
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +32,12 @@ function App() {
       </Route>
       <Route exact path="/create">
         <CreateMissed />
+      </Route>
+      <Route exact path="/profile">
+        <Profile />
+      </Route>
+      <Route exact path="/profile/yourdata">
+        <Checkout />
       </Route>
     </BrowserRouter>
   );
