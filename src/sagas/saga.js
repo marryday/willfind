@@ -176,7 +176,6 @@ const fetchMissedPpl = async () => {
 
 function* addPointFetch(action) {
   try {
-    debugger
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
     const obj = { coordinates: coordinates, userId: action.id }
 
@@ -191,7 +190,6 @@ function* addPointFetch(action) {
 
 function* setStateSaga(action) {
   try {
-    debugger
     const poteryashes = yield call(fetchMissedPpl);
     yield put(putCoordinates(poteryashes))
   } catch (e) {
