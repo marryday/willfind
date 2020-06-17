@@ -89,12 +89,12 @@ router.get("/countcoordinates", async (req, res) => {
     let poteryashes = await Poteryash.find();
     let matches = poteryashes.filter(
       poteryashes.map((p) => p.coordinates[0] + p.coordinates[1]) -
-        user.coordinates[0] +
-        user.coordinates[1] < 0.5
+        (user.coordinates[0] + user.coordinates[1]) <
+        0.5
     );
     console.log(matches);
   } catch (e) {
-    res.json(e)
+    res.json(e);
   }
 });
 module.exports = router;

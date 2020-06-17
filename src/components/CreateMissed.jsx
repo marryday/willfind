@@ -14,8 +14,6 @@ export default () => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [terrain, setTerrain] = useState("");
-  const [location, setLocation] = useState("");
-  const [img, setImg] = useState("");
   const [birthday, setBirthday] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
@@ -51,7 +49,6 @@ export default () => {
             authorTel: authorTel,
             name: name,
             terrain: terrain,
-            location: location,
             gender: gender,
             img: url,
             birthday: birthday,
@@ -68,13 +65,12 @@ export default () => {
         })
       ).json();
       dispatch(addPoint(searchQuery, result._id));
-      if (result) {
-        history.push('/profile');
-      }
     } catch(e){
         console.error(e.message)
     }
-      
+      // if (result.ok === "ok") {
+      //   history.goBack();
+      // }
     
   };
   return (
