@@ -38,7 +38,7 @@ export default function ListFind() {
                     <img alt="Remy Sharp" src={item.image ? item.image : "https://ferrum-body.ru/wp-content/uploads/2017/03/3przq6v.jpg"} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${item.health} ${item.sex === "Male" ? 'мужчина' : 'женщина'}`}
+                    primary={`${item.health} ${item.sex === "Male" ? 'Пропал мужчина' : item.sex === "Female" ? 'Пропала женщина' : 'Пропал'}`}
                     secondary={
                       <Fragment>
                         <Typography
@@ -50,7 +50,7 @@ export default function ListFind() {
 
                           {item.firstName} {item.middleName} {item.lastName}
                         </Typography>
-                        <div>Возраст: {getAges(String(item.birthDate).slice(0, 4))}</div>
+                        <div>Возраст: {item.birthDate ? getAges(String(item.birthDate).slice(0, 4)) : 'не известен'}</div>
                         <div>ЧУТЬ ПОЗЖЕ{item.addressOfLost}</div>
                       </Fragment>
                     }
