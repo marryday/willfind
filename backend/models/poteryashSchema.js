@@ -20,6 +20,7 @@ const poteryashSchema = new mongoose.Schema({
   foundLocationX: { type: String },
   foundLocationY: { type: String },
   coordinates: [{type: String}],
+  ages: {type: String},
   author: { 
     type: mongoose.ObjectId,
     ref: 'User'

@@ -24,31 +24,22 @@ export default () => {
   const [stuff, setStuff] = useState("");
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
-  // const [filePath, setFilePath] = useState('');
+
+  const [addressOfLost, setAddressOfLost] = useState('')
 
   const [searchQuery, SetSearchQuery] = useState("");
 
   const handleInput = (event) => {
+    setAddressOfLost(event.target.value);
     SetSearchQuery(event.target.value);
+    console.log(addressOfLost, searchQuery)
   };
 
 
 
   const submitHandler = async (e) => {
     console.log("123");
-    try {
-      
-      
-      // const formData = new FormData();
-      // formData.append("file", img);
-      // const res = await (
-      //   await fetch("/upload", {
-      //     method: "POST",
-      //     body: formData,
-      //   })
-      // ).json()
-    
-      
+    try {  
       const result = await (
         await fetch("/upload/missedperson", {
           method: "POST",
@@ -72,16 +63,18 @@ export default () => {
             specificMarks: specificMarks,
             time,
             author: localStorage.getItem("userId"),
+            addressOfLost: searchQuery,
           }),
         })
       ).json();
       dispatch(addPoint(searchQuery, result._id));
+      if (result) {
+        history.push('/profile');
+      }
     } catch(e){
         console.error(e.message)
     }
-      // if (result.ok === "ok") {
-      //   history.goBack();
-      // }
+      
     
   };
   return (
@@ -144,7 +137,7 @@ export default () => {
         onChange={(e) => setBirthday(e.target.value)}
       ></input>
       <p>Адрес пропажи</p>
-      <input type="text" name="inputСoordinates" onChange={handleInput} />
+      <input type="text" name="inputСoordinates" onChange={(e) => handleInput(e)} />
       <p>Местность пропажи</p>
       <input
         type="text"
@@ -187,7 +180,7 @@ export default () => {
         onChange={(e) => setStuff(e.target.value)}
       />
       <p> Фотография пропавшего </p>
-      <CropForm onChange={console.log(CropForm.dataUrl)}/>
+      <CropForm />
       <p>Дополнительная информация</p>
       <input
         type="text"

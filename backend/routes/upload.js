@@ -19,6 +19,10 @@ router.post("/", (req, res) => {
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   });
 });
+const getAges = (year) =>{ 
+  if(year)
+  return (new Date().getFullYear() - Number(year))
+}
 
 router.post("/missedperson", async (req, res) => {
   console.log('ya tut')
@@ -27,6 +31,7 @@ router.post("/missedperson", async (req, res) => {
     const firstName = fio[1];
     const middleName = fio[2];
     const lastName = fio[0];
+   const ages = getAges(String(req.body.birthday).slice(0,4))
     const author = await User.findById(req.body.author);
     console.log(req.body.url)
     const poteryash = await new Poteryash({
@@ -35,7 +40,7 @@ router.post("/missedperson", async (req, res) => {
       middleName,
       sex: req.body.gender,
       birthDate: req.body.birthday,
-      addressOfLost: req.body.location,
+      addressOfLost: req.body.addressOfLost,
       timeOfLost: req.body.time,
       aboutOfLost: req.body.description,
       health: req.body.health,
@@ -44,6 +49,7 @@ router.post("/missedperson", async (req, res) => {
       thingsWith: req.body.stuff,
       image: req.body.img,
       createdAt: new Date(),
+      ages,
       author,
     });
     await poteryash.save();
