@@ -1,0 +1,41 @@
+[
+  {
+    "coordinates": [
+      55.831903,
+      37.411961
+    ],
+    "firstName": "Маша",
+    "lastName": "Микенко",
+    "middleName": "Афанасьевич",
+    "id": "001",
+    "birthDate": "14.02.1978",
+    "clothes": "Оежда1111...",
+    "timeOfLost" : "увидели тогда-то 111"
+  },
+  {
+    "coordinates": [
+      55.763338,
+      37.565466
+    ],
+    "firstName": "Petya",
+    "lastName": "Владимирович",
+    "middleName": "Петрович",
+    "id": "002",
+    "birthDate": "15.01.1991",
+    "clothes": "Оежда2222...",
+    "timeOfLost" : "увидели тогда-то 222"
+  },
+  {
+    "coordinates": [
+      55.744522,
+      37.616378
+    ],
+    "firstName": "Ksenya",
+    "lastName": "Фамилия333",
+    "middleName": "Эдуардович",
+    "id": "003",
+    "birthDate": "1.05.1988",
+    "clothes": "Оежда333...",
+    "timeOfLost" : "увидели тогда-то 333"
+  }
+]
