@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -19,166 +20,48 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListFind() {
+  const state = useSelector((state) => state.mapReducer);
   const classes = useStyles();
-
+  const getAges = (year) => {
+    console.log(year);
+    return (new Date().getFullYear() - Number(year))
+  }
   return (
     <Fragment>
       <div className="mainListFind ">
-        <div className="oneListFind">
-          <Paper elevation={3}>
-            <ListItem alignItems="flex-start" >
-              <ListItemAvatar>
-                <img alt="Remy Sharp" src="https://b.radikal.ru/b08/2006/0a/63f66423a42e.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Пропал(а)"
-                secondary={
-                  <Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Иванов Иван Иванович
-              </Typography>
-                    <div>Возраст: 92</div>
-                    <div>Местоположение: г. Москва ВАО, Вешняковский район </div>
-                  </Fragment>
-                }
-              />
-              <div className="dataListFind">Дата: 15.07.18 </div>
-              <div className="btnListFind"><Link to='/chat'>Подробнее</Link></div>
-            </ListItem>
-          </Paper>
-        </div>
+        {state.points.map(item =>
+          <div className="oneListFind">
+            <Paper elevation={3}>
+              <div className="oneListFindPaper">
+                <ListItem alignItems="flex-start" >
+                  <ListItemAvatar>
+                    <img alt="Remy Sharp" src={item.image ? item.image : "https://ferrum-body.ru/wp-content/uploads/2017/03/3przq6v.jpg"} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${item.health} ${item.sex === "Male" ? 'мужчина' : 'женщина'}`}
+                    secondary={
+                      <Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
 
-        <div className="oneListFind">
-          <ListItem alignItems="flex-start" >
-            <ListItemAvatar>
-              <img alt="Remy Sharp" src="https://b.radikal.ru/b08/2006/0a/63f66423a42e.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Пропал(а)"
-              secondary={
-                <Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    Иванов Иван Иванович
-              </Typography>
-                  <div>Возраст: 92</div>
-                  <div>Местоположение: г. Москва ВАО, Вешняковский район </div>
-                </Fragment>
-              }
-            /><div className="dataListFind">Дата: 15.07.18 </div><div className="btnListFind"> <Link>Подробнее</Link></div>
-          </ListItem>
-        </div>
-
-        <div className="oneListFind">
-          <ListItem alignItems="flex-start" >
-            <ListItemAvatar>
-              <img alt="Remy Sharp" src="https://b.radikal.ru/b08/2006/0a/63f66423a42e.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Пропал(а)"
-              secondary={
-                <Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    Иванов Иван Иванович
-              </Typography>
-                  <div>Возраст: 92</div>
-                  <div>Местоположение: г. Москва ВАО, Вешняковский район </div>
-                </Fragment>
-              }
-            /><div className="dataListFind">Дата: 15.07.18 </div><div className="btnListFind"> <Link>Подробнее</Link></div>
-          </ListItem>
-        </div>
-
-        <div className="oneListFind">
-          <ListItem alignItems="flex-start" >
-            <ListItemAvatar>
-              <img alt="Remy Sharp" src="https://c.radikal.ru/c23/2006/58/5877094dc077.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Пропал(а)"
-              secondary={
-                <Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    Иванов Иван Иванович
-              </Typography>
-                  <div>Возраст: 92</div>
-                  <div>Местоположение: г. Москва ВАО, Вешняковский район </div>
-                </Fragment>
-              }
-            /><div className="dataListFind">Дата: 15.07.18 </div><div className="btnListFind"> <Link>Подробнее</Link></div>
-          </ListItem>
-        </div>
-
-        <div className="oneListFind">
-          <ListItem alignItems="flex-start" >
-            <ListItemAvatar>
-              <img alt="Remy Sharp" src="https://b.radikal.ru/b08/2006/0a/63f66423a42e.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Пропал(а)"
-              secondary={
-                <Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    Иванов Иван Иванович
-              </Typography>
-                  <div>Возраст: 92</div>
-                  <div>Местоположение: г. Москва ВАО, Вешняковский район </div>
-                </Fragment>
-              }
-            /><div className="dataListFind">Дата: 15.07.18 </div><div className="btnListFind"> <Link>Подробнее</Link></div>
-          </ListItem>
-        </div>
-
-        <div className="oneListFind">
-          <ListItem alignItems="flex-start" >
-            <ListItemAvatar>
-              <img alt="Remy Sharp" src="http://info-la.ru/photo/84226_1919322455.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Пропал(а)"
-              secondary={
-                <Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    Васьков Васёк Васькович
-              </Typography>
-                  <div>Возраст: 15</div>
-                  <div>Местоположение: г. Рязань </div>
-                </Fragment>
-              }
-            /><div className="dataListFind">Дата: 15.11.17 </div><div className="btnListFind"> <Link>Подробнее</Link></div>
-          </ListItem>
-        </div>
-
-
+                          {item.firstName} {item.middleName} {item.lastName}
+                        </Typography>
+                        <div>Возраст: {getAges(String(item.birthDate).slice(0, 4))}</div>
+                        <div>ЧУТЬ ПОЗЖЕ{item.addressOfLost}</div>
+                      </Fragment>
+                    }
+                  />
+                  <div className="dataListFind">Дата: {(item.createdAt).slice(0, 10)}</div>
+                  <div className="btnListFind"><Link to={`/chat/${item._id}`}>Подробнее</Link></div>
+                </ListItem>
+              </div>
+            </Paper>
+          </div>
+        )}
 
       </div>
     </Fragment>
