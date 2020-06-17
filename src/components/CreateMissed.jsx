@@ -37,6 +37,8 @@ export default () => {
   const submitHandler = async (e) => {
     console.log("123");
     try {
+      
+      
       // const formData = new FormData();
       // formData.append("file", img);
       // const res = await (

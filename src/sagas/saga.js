@@ -8,8 +8,8 @@ import {
   loadingStart,
   loadingError,
 } from "../actionCreators/actionCreatorSaga";
-import { addPoint } from "../redux/actions";
-import { ADD_POINT } from "../redux/types";
+import { addPoint, setState} from "../redux/actions";
+import { ADD_POINT, SET_STATE } from "../redux/types";
 import {putCoordinates} from '../redux/actions'
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
@@ -173,16 +173,26 @@ const fetchMissedPpl = async () => {
 
 function* addPointFetch(action) {
   try {
+    debugger
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
     const obj = { coordinates: coordinates, userId: action.id }
-    
+
     const updated = yield call(fetchPutCoordinates, obj )
     const poteryashes = yield call(fetchMissedPpl);
-    debugger
     yield put(putCoordinates(poteryashes))
     console.log(poteryashes)
   } catch (error) {
     yield put(loadingError(error.message));
+  }
+}
+
+function* setStateSaga(action){
+  try{
+    debugger
+    const poteryashes = yield call(fetchMissedPpl);
+    yield put(putCoordinates(poteryashes))
+  }catch(e){
+  yield put(loadingError(e.message))
   }
 }
 
@@ -193,6 +203,7 @@ function* saga() {
   yield takeEvery(actionTypes.logoutSaga, logoutPage);
   yield takeEvery(actionTypes.registerSaga, registerPage);
   yield takeEvery(ADD_POINT, addPointFetch);
+  // yield takeEvery(setState, setStateSaga)
   // action chto bi poluchit pointi
 }
 

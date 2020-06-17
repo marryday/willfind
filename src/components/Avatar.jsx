@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { useDispatch } from 'react-redux';
-// import { dressForNewLook } from '../redux/actioncreators/actionsSaga'
 // import './App.css';
 import {setImage} from '../redux/actions'
 export default function CropForm() {
@@ -78,7 +77,7 @@ const [url,setUrl] = useState(null);
     dispatch(setImage(dataUrl))
     
   }
-    const { crop, croppedImageUrl, src } = state;
+    const { crop, croppedImageUrl, src='http://localhost:3000/no-photo.jpg' } = state;
     return (
       <div className="App">
         <div>

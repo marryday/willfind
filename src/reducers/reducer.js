@@ -5,7 +5,7 @@ const initialState = {
   url: null,
   errorMessage: null,
   loginSessions: false,
-  src: null
+  src: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,11 +55,11 @@ const reducer = (state = initialState, action) => {
         isLoading: null,
         loginSessions: false,
       };
-      case 'IMAGE/SET_IMAGE':
-        return {
-          ...state,
-          src: action.src
-        }
+    case "IMAGE/SET_IMAGE":
+      return {
+        ...state,
+        src: action.src,
+      };
 
     default:
       return state;

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import ReactDOM from "react-dom";
 import { YMaps, Map, Clusterer, Placemark } from "../ymaps";
-
 import points from "./points.json";
 import Button from "@material-ui/core/Button";
 import { addPoint } from "../redux/actions";
+import {setState} from '../redux/actions'
 
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
@@ -33,8 +33,23 @@ const getPointOptions = () => {
 };
 
 export default function MapComponent() {
+ 
+
   const dispatch = useDispatch();
   const [searchQuery, SetSearchQuery] = useState('')
+  const obj = {type: 'SET_STATE'}
+
+  // const useFetching = (someFetchActionCreator) => {
+  //   const dispatch = useDispatch();
+  //   useEffect(() => {
+  //     dispatch(setState())
+  //   }, [])
+  // }
+  // useFetching()
+  // useEffect(() => {
+  //   dispatch(obj);
+    
+  // }, [])
 
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
