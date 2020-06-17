@@ -1,1 +1,2 @@
 export const ADD_POINT = 'MAP/ADD_POINT';
+export const PUT_COORDINATES = 'MAP/PUT_COORDINATES'

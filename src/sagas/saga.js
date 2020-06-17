@@ -10,6 +10,7 @@ import {
 } from "../actionCreators/actionCreatorSaga";
 import { addPoint } from "../redux/actions";
 import { ADD_POINT } from "../redux/types";
+import {putCoordinates} from '../redux/actions'
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
@@ -87,6 +88,8 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
   }
 }
 
+
+
 const getFetchSearchQuery = async (searchQuery) => {
   // console.log( 'searchQuery',searchQuery)
   try {
@@ -96,16 +99,16 @@ const getFetchSearchQuery = async (searchQuery) => {
     const latitude = coordinates[1]
     const longitude = coordinates[0]
 
-    console.log('result', result)
-    console.log('coordinates', coordinates)
-    console.log('latitude', latitude)
-    console.log('longitude', longitude)
+    // console.log('result', result)
+    // console.log('coordinates', coordinates)
+    // console.log('latitude', latitude)
+    // console.log('longitude', longitude)
     // let placemark = new YMaps.Placemark([latitude, longitude], {})
     // if (coordinates) Map.geoObjects.add(placemark);
     return [latitude, longitude];
   }
   catch (error) {
-
+    console.error(error.message)
   }
 }
 
@@ -144,12 +147,40 @@ function* registerPage(action) {
   }
 }
 
+const fetchPutCoordinates = async (obj) => {
+  return await (
+    await fetch("/upload/coordinates", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+       id: obj.userId,
+      coordinates: obj.coordinates
+      }),
+    })
+  ).json();
+};
 
+const fetchMissedPpl = async () => {
+  return await(await fetch('/upload/missedpeople', {
+    method: 'GET',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+  })).json()
+}
 
 function* addPointFetch(action) {
   try {
-    const coordinates = yield call(getFetchSearchQuery(action)) //[latitude, longitude]
-    const obj = { coordinates: coordinates, userId: action.userId }
+    const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
+    const obj = { coordinates: coordinates, userId: action.id }
+    
+    const updated = yield call(fetchPutCoordinates, obj )
+    const poteryashes = yield call(fetchMissedPpl);
+    debugger
+    yield put(putCoordinates(poteryashes))
+    console.log(poteryashes)
   } catch (error) {
     yield put(loadingError(error.message));
   }
