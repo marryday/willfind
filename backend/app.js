@@ -22,9 +22,9 @@ mongoose.connect('mongodb://localhost:27017/WillFind', {
 });
 
 // view engine setup
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'templates', 'views'));
-hbs.registerPartials(path.join(__dirname, 'templates', 'partials'));
+//app.set('view engine', 'hbs');
+//app.set('views', path.join(__dirname, 'templates', 'views'));
+//hbs.registerPartials(path.join(__dirname, 'templates', 'partials'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,7 +32,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 //--------------------------------------
 
 app.use(fileUpload()); //возможность загружать файлы

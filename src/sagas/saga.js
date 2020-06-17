@@ -10,7 +10,7 @@ import {
 } from "../actionCreators/actionCreatorSaga";
 import { addPoint } from "../redux/actions";
 import { ADD_POINT } from "../redux/types";
-import {putCoordinates} from '../redux/actions'
+import { putCoordinates } from '../redux/actions'
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
@@ -41,12 +41,16 @@ const fetchLogin = async ({ email, password }) => {
 
 const fetchLogout = async () => {
   try {
-    const response = await (await fetch(`/profile/logout`, {
-      method: "GET",
+    const response = await fetch(`/profile/logout`, {
+      method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
+        "Content-Type": "application/json",
+        //charset=utf-8",
       },
-    })).json();
+    });
+    const result = await response.json();
+    console.log(result)
+
     if (response.status) {
       localStorage.clear();
       return false;
@@ -54,7 +58,7 @@ const fetchLogout = async () => {
       alert("net nichego");
     }
   } catch (e) {
-    alert("Ошибка, сервер недоступен");
+    console.message("Ошибка, сервер недоступен", e);
   }
 }
 
@@ -155,17 +159,17 @@ const fetchPutCoordinates = async (obj) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-       id: obj.userId,
-      coordinates: obj.coordinates
+        id: obj.userId,
+        coordinates: obj.coordinates
       }),
     })
   ).json();
 };
 
 const fetchMissedPpl = async () => {
-  return await(await fetch('/upload/missedpeople', {
+  return await (await fetch('/upload/missedpeople', {
     method: 'GET',
-    headers:{
+    headers: {
       'Content-Type': 'application/json',
     },
   })).json()
@@ -175,8 +179,8 @@ function* addPointFetch(action) {
   try {
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
     const obj = { coordinates: coordinates, userId: action.id }
-    
-    const updated = yield call(fetchPutCoordinates, obj )
+
+    const updated = yield call(fetchPutCoordinates, obj)
     const poteryashes = yield call(fetchMissedPpl);
     debugger
     yield put(putCoordinates(poteryashes))

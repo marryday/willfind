@@ -29,6 +29,7 @@
     "express-session": "^1.17.1",
     "faker": "^4.1.0",
     "hbs": "^4.1.1",
+    "http-proxy-middleware": "^1.0.4",
     "method-override": "^3.0.0",
     "mongoose": "^5.9.15",
     "morgan": "^1.10.0",

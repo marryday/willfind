@@ -7,7 +7,6 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
-import DehazeIcon from '@material-ui/icons/Dehaze';
 import MenuIcon from '@material-ui/icons/Menu';
 
 

@@ -71,13 +71,13 @@ export default () => {
         })
       ).json();
       dispatch(addPoint(searchQuery, result._id));
-    } catch(e){
-        console.error(e.message)
+    } catch (e) {
+      console.error(e.message)
     }
-      // if (result.ok === "ok") {
-      //   history.goBack();
-      // }
-    
+    // if (result.ok === "ok") {
+    //   history.goBack();
+    // }
+
   };
   return (
     <div
@@ -185,8 +185,8 @@ export default () => {
       <input
         type="file"
         onChange={(e) => {
-          console.log(img)
           setImg(e.target.files[0])
+          console.log(img)
         }}
       />
       <p>Дополнительная информация</p>

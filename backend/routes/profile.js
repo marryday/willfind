@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const  User  = require("../models/userSchema");
+const User = require("../models/userSchema");
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const bcrypt = require("bcrypt");
@@ -167,9 +167,10 @@ router.post("/session", (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
+  console.log("Да чувакб ты здесь")
   req.session.destroy();
-  res.json({ status: true, message: "До встречи!" });
+  res.json({ status: true });
 });
 
 module.exports = router;
