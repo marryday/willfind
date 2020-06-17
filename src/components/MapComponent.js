@@ -21,13 +21,30 @@ const mapState = {
   coordinates: []
 };
 
-const getPointData = (name, profileLink) => {
-  console.log('name',name)
+const getPointData = (
+  firstName,
+  lastName,
+  middleName,
+  birthDate,
+  timeOfLost,
+  clothes,
+  id) => {
+  console.log('name', firstName)
   return {
-    balloonContentBody: `
-     <strong>1111 ${name}  </strong>
-       <a>${profileLink}</a>`,
-    clusterCaption: ` <strong> 2222 ${name}  </strong>`
+    balloonContentBody:
+      `<address>
+      <strong>${firstName} ${lastName} ${middleName}</strong>,
+      <br/>
+      Год рождения: ${birthDate},
+      <br/>
+      Дата пропажи: ${timeOfLost},
+       <br/>
+      Комментарии: ${clothes},
+      <br/>
+      Перейти в профиль,<a href="/people/${id}"> подробнее...</a>,
+      </address>`,
+    clusterCaption: ` <strong> ${firstName} ${lastName} ${middleName}</strong>`
+
   };
 };
 
@@ -79,9 +96,18 @@ export default function MapComponent() {
 
               {testPoints.length > 0 && testPoints.map((objUser, idx) => {
                 return <Placemark
-                  key={idx}
+                  key={objUser.id}
                   geometry={{coordinates:objUser.coordinates}}
-                  properties={getPointData(objUser.name, objUser.profileLink)}
+                  properties={
+                    getPointData(
+                    objUser.firstName,
+                    objUser.lastName,
+                    objUser.middleName,
+                    objUser.birthDate,
+                    objUser.clothes,
+                    objUser.timeOfLost,
+                    objUser.id
+                    )}
                   options={getPointOptions()}
                 />
               })}
