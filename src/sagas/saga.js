@@ -8,8 +8,8 @@ import {
   loadingStart,
   loadingError,
 } from "../actionCreators/actionCreatorSaga";
-import { addPoint, setState} from "../redux/actions";
-import { ADD_POINT, SET_STATE } from "../redux/types";
+import { addPoint, setSagaState} from "../redux/actions";
+import { ADD_POINT, SET_SAGA_STATE } from "../redux/types";
 import {putCoordinates} from '../redux/actions'
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
@@ -203,7 +203,7 @@ function* saga() {
   yield takeEvery(actionTypes.logoutSaga, logoutPage);
   yield takeEvery(actionTypes.registerSaga, registerPage);
   yield takeEvery(ADD_POINT, addPointFetch);
-  // yield takeEvery(setState, setStateSaga)
+  yield takeEvery(SET_SAGA_STATE, setStateSaga)
   // action chto bi poluchit pointi
 }
 
