@@ -4,9 +4,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Copyright from "./Copyright";
 import { useSelector, useDispatch } from "react-redux";
 import { registerSaga } from "../actionCreators/actionCreatorSaga";
+import AlertComponent from "../components/Alert"
+
+
 
 export default function RegisterUser() {
   const state = useSelector((state) => state);
+  const errorMessage = useSelector((state) => state.appReducer.alert);
+  console.log(errorMessage)
   const dispatch = useDispatch();
 
   const useStyles = makeStyles((theme) => ({
@@ -49,11 +54,13 @@ export default function RegisterUser() {
   return (
     <>
       <Container component="main" maxWidth="xs">
+
         <CssBaseline />
         <div className={"classes.paper}"} >
           <Avatar className={useStyles.avatar}>
             <LockOutlinedIcon />
           </Avatar>
+          {errorMessage ? <AlertComponent message={errorMessage} /> : <></>}
           <Typography component="h1" variant="h5">
             Регистрация
           </Typography>
@@ -111,7 +118,10 @@ export default function RegisterUser() {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={() => dispatch(registerSaga(state.name, state.email, state.password, state.repeadPassword))}
+              onClick={() => {
+                console.log(state.name, state.email, state.password, state.repeadPassword);
+                dispatch(registerSaga(state.name, state.email, state.password, state.repeadPassword))
+              }}
             >
               Зарегистироваться
           </Button>
@@ -120,6 +130,7 @@ export default function RegisterUser() {
         <Box mt={8}>
           <Copyright />
         </Box>
+
       </Container>
     </>
   );

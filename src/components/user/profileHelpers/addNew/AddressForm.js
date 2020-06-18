@@ -10,16 +10,13 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-//import CropForm from './Avatar'
+import CropForm from '../../../Avatar'
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { addPoint } from "../../../../redux/actions";
 import Button from '@material-ui/core/Button';
+import "./AddressForm.css"
 //import './AvatarStyle.css'
-
-
-
-
 
 const useStyles = makeStyles({
   root: {
@@ -161,9 +158,10 @@ export default function AddressForm() {
   };
 
   return (
-    <React.Fragment>
+    <div className="mainAddFindPeople">
+
       <Typography variant="h6" gutterBottom>
-        Информация о пропавшем
+        Оставить заявку на поиск человека:
       </Typography>
 
 
@@ -182,6 +180,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={12}>
           <TextField
             required
+
             id="description"
             name="description"
             label="Контакты заявителя: телефон для связи (обязательно):"
@@ -233,7 +232,7 @@ export default function AddressForm() {
             label="Местность пропажи:"
             fullWidth
             onChange={(e) => setTerrain(e.target.value)}
-            autoComplete="shipping address-line1"
+            autoComplete='off'
           />
         </Grid>
         <Grid item xs={12}>
@@ -296,6 +295,7 @@ export default function AddressForm() {
             fullWidth
           />
         </Grid>
+
         <Grid item xs={12} sm={12}>
           <TextField
             required
@@ -306,7 +306,10 @@ export default function AddressForm() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
+          <CropForm />
+        </Grid>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             required
             type="file"
@@ -315,14 +318,20 @@ export default function AddressForm() {
             label="Фотография"
             fullWidth
           />
+
+
+        </Grid> */}
+        <Grid item xs={12} sm={10}>
         </Grid>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={(e) => submitHandler(e)}
-        >
-          Создать
+        <Grid item xs={12} sm={2}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={(e) => submitHandler(e)}
+          >
+            Создать
       </Button>
+        </Grid>
         {/* <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
@@ -330,6 +339,6 @@ export default function AddressForm() {
           />
         </Grid> */}
       </Grid>
-    </React.Fragment>
+    </div>
   );
 }

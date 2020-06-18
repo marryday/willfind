@@ -6,6 +6,7 @@ const initialState = {
   errorMessage: null,
   loginSessions: false,
   src: null,
+  person: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,7 +40,7 @@ const reducer = (state = initialState, action) => {
         isLoading: null,
         loginSessions: true,
       };
-    case actionTypes.registerSaga:
+    case actionTypes.registerFetch:
       return {
         ...state,
         errorMessage: null,
@@ -60,7 +61,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         src: action.src,
       };
-
+    case actionTypes.missedPersonFetch:
+      return {
+        ...state,
+        person: action.person,
+      };
     default:
       return state;
   }

@@ -35,7 +35,7 @@ export default function ListFind() {
               <div className="oneListFindPaper">
                 <ListItem alignItems="flex-start" >
                   <ListItemAvatar>
-                    <img alt="Remy Sharp" src={item.image ? item.image : "https://ferrum-body.ru/wp-content/uploads/2017/03/3przq6v.jpg"} />
+                    <img alt="Remy Sharp" src={item.image ? item.image : "https://zaborkin.ru/img/icon.png"} />
                   </ListItemAvatar>
                   <ListItemText
                     primary={`${item.sex === "Male" ? 'Пропал' : item.sex === "Female" ? 'Пропала' : 'Пропал'}`}
@@ -52,7 +52,7 @@ export default function ListFind() {
                         </Typography>
                         <div>Состояние здоровья: {item.health}</div>
                         <div>Возраст: {item.ages ? item.ages : 'не известен'}</div>
-                        <div>Местоположение:{item.addressOfLost}</div>
+                        <div>Местоположение: {item.addressOfLost}</div>
                       </Fragment>
                     }
                   />
