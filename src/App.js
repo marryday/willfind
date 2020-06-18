@@ -10,12 +10,15 @@ import History from "./heplers/history"
 import PoteryashList from './components/PoteryshList'
 import CreateMissed from './components/CreateMissed'
 import Chat from './components/Chat'
+import MainPage from './components/mainPage/MainPage'
 
 function App() {
   return (
     <Router history={History}>
       <NavBar />
-      <Route exact path="/"></Route>
+      <Route exact path="/">
+        <MainPage />
+      </Route>
       <Route exact path="/login">
         <Login />
       </Route>
@@ -37,7 +40,7 @@ function App() {
       <Route exact path="/people/:id">
         <Chat />
       </Route>
-      <Route path="/404">
+      <Route>
         <NotFound404 />
       </Route>
       {/*<Redirect to={'/404'}></Redirect>*/}
