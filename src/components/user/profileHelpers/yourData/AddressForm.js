@@ -17,6 +17,10 @@ export default function AddressForm() {
       method:'GET'
     }).then(result => result.json().then(data => {setName(data.firstName); setLastName(data.lastName); SetSearchQuery(data.address)}))}, [])
 
+  useEffect(() => {
+    fetch(`upload/countcoordinates/${id}`, {method:'GET'}).then(r => r.json().then(data => console.log(data)))
+  })
+
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
     const user = {
