@@ -1,4 +1,4 @@
-import {ADD_POINT, PUT_COORDINATES} from "./types";
+import {ADD_POINT, PUT_COORDINATES, SET_ADDRESS} from "./types";
 
 const initialState = {points: []};
 
@@ -8,7 +8,11 @@ export const mapReducer = (state = initialState, action) => {
     //   return {...state, points: [...state.points, action.payload]}
     case PUT_COORDINATES:
       return{...state, points: action.payload.ppl}
-    default:
+    case SET_ADDRESS: 
+    return{...state, user: action.payload}
+    case 'SET_PAYMENT':
+      return{...state, payment: action.payload}
+    default :
       return state;
   }
 }

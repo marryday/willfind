@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema({
   image: { type: String, default: 'http://localhost:3000/no-photo.jpg' },
   locationX: {type: String},
   locationY: {type: String},
+  coordinates: [{ type: String }],
+  address: {type: String},
   searching: [
     {
       type: mongoose.Schema.Types.ObjectId,

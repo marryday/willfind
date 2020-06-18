@@ -1,11 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import {useDispatch} from 'react-redux';
+import {setPayment} from '../../../../redux/actions'
 
 export default function PaymentForm() {
+  const dispatch = useDispatch();
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  
+  const handleInput = (e) => {
+    const payment = {
+      login,
+      password,
+      email,
+    }
+    dispatch(setPayment(payment))
+  }
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +29,7 @@ export default function PaymentForm() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField required id="login" label="Логин" fullWidth />
+          <TextField required id="login" label="Логин" fullWidth onChange={e => setLogin(e.target.value)} />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -21,16 +37,18 @@ export default function PaymentForm() {
             id="email"
             label="Email"
             fullWidth
+            onChange={e => setEmail(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="password" label="Пароль" fullWidth />
+          <TextField required id="password" label="Пароль" type="password" fullWidth onChange={e => setPassword(e.target.value)}/>
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
+          <TextField onChange={e => handleInput(e)}
             required
             id="passwordAgain"
             label="Пароль повторно"
+            type="password"
             fullWidth
           />
         </Grid>

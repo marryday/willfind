@@ -62,6 +62,11 @@ router.post("/missedperson", async (req, res) => {
   }
 });
 
+router.get('/missedperson', async (req, res) => {
+  const user = await Poteryash.findById(req.body.id)
+  res.json(user)
+})
+
 router.get("/missedpeople", async (req, res) => {
   try {
     let ppl = await Poteryash.find();

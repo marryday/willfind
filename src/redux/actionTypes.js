@@ -8,4 +8,5 @@ export default {
   loadingError: "loadingError",
   loadToDoSaga: "loadToDoSaga",
   registerSaga: "registerSaga",
+  setAddress: 'setAddress',
 };

@@ -2,3 +2,5 @@ export const ADD_POINT = 'MAP/ADD_POINT';
 export const PUT_COORDINATES = 'MAP/PUT_COORDINATES'
 export const SET_IMAGE = 'IMAGE/SET_IMAGE';
 export const SET_SAGA_STATE = 'SET_SAGA_STATE'
+export const SET_ADDRESS = 'SET_ADDRESS'
+export const UPDATE_USER = 'UPDATE_USER'
