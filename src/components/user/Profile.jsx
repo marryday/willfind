@@ -23,8 +23,10 @@ import { mainListItems, secondaryListItems } from './profileHelpers/listItems';
 import Chart from './profileHelpers/Chart';
 import Deposits from './profileHelpers/Deposits';
 import Orders from './profileHelpers/Orders';
+import Checkout from './profileHelpers/yourData/Checkout';
 import CreateMissed from '../CreateMissed';
-
+import Map from '../map';
+import AddNewPoteryah from './profileHelpers/addNew/AddNewPoteryash';
 
 function Copyright() {
   return (
@@ -118,6 +120,9 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  fixedPaddings: {
+    margin: theme.spacing(2),
+  }
 }));
 
 export const Profile = () => {
@@ -130,6 +135,72 @@ export const Profile = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [stat, setStat] = useState(true);
+  const [search, setSearch] = useState(true);
+  const [found, setFound] = useState(true);
+  const [newone, setNewone] = useState(false);
+  const [poteryashki, setPoteryashki] = useState(false);
+  const [addNew, setAddNew] = useState(false);
+  const [yourData, setYourData] = useState(false);
+
+
+  const handleOpenDashboard = () => {
+    setNewone(false);
+    setPoteryashki(false);
+    setAddNew(false);
+    setYourData(false);
+    setStat(true);
+    setSearch(true);
+    setFound(true);
+  }
+
+  const handleOpenNewOne = () => {
+    setPoteryashki(false);
+    setAddNew(false);
+    setYourData(false);
+    setStat(false);
+    setSearch(false);
+    setFound(false);
+    setNewone(true);
+  }
+
+  const handleOpenPoteryashki = () => {
+    setAddNew(false);
+    setYourData(false);
+    setStat(false);
+    setSearch(false);
+    setFound(false);
+    setNewone(false);
+    setPoteryashki(true);
+  }
+
+  const handleOpenAddNew = () => {
+    setYourData(false);
+    setStat(false);
+    setSearch(false);
+    setFound(false);
+    setPoteryashki(false);
+    setNewone(false);
+    setAddNew(true);
+  }
+
+  const handleOpenYourData = () => {
+    setNewone(false);
+    setPoteryashki(false);
+    setAddNew(false);
+    setStat(false);
+    setSearch(false);
+    setFound(false);
+    setYourData(true);
+  }
+
+  const objForLists = {
+    handleOpenDashboard,
+    handleOpenNewOne,
+    handleOpenPoteryashki,
+    handleOpenAddNew,
+    handleOpenYourData,
+  }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -170,7 +241,7 @@ export const Profile = () => {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{mainListItems(objForLists)}</List>
         <Divider />
         {/*<List>{secondaryListItems}</List>*/}
       </Drawer>
@@ -179,27 +250,16 @@ export const Profile = () => {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
+            {stat ? <Grid item xs={12} md={8} lg={9}><Paper className={fixedHeightPaper}><Chart /></Paper></Grid> : null}
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
+            {search ? <Grid item xs={12} md={4} lg={3}><Paper className={fixedHeightPaper}><Deposits /></Paper></Grid> : null}
+
             {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
+            {found ? <Grid item xs={12}><Paper className={classes.paper}><Orders /></Paper></Grid> : null}
+            {yourData ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Checkout /></Paper></Grid> : null}
+            {addNew ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><AddNewPoteryah /></Paper></Grid> : null}
+            {poteryashki ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Map /></Paper></Grid> : null}
           </Grid>
-          {/*           <Box pt={4}>
-            <Copyright />
-          </Box> */}
         </Container>
       </main>
     </div>

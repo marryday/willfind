@@ -8,8 +8,9 @@ import {
   loadingStart,
   loadingError,
 } from "../actionCreators/actionCreatorSaga";
-import { addPoint } from "../redux/actions";
-import { ADD_POINT } from "../redux/types";
+import { addPoint, setSagaState } from "../redux/actions";
+import { ADD_POINT, SET_SAGA_STATE } from "../redux/types";
+import { putCoordinates } from '../redux/actions'
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
@@ -39,22 +40,25 @@ const fetchLogin = async ({ email, password }) => {
 };
 
 const fetchLogout = async () => {
-  try {
-    const response = await (await fetch(`/profile/logout`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })).json();
-    if (response.status) {
-      localStorage.clear();
-      return false;
-    } else {
-      alert("net nichego");
-    }
-  } catch (e) {
-    alert("Ошибка, сервер недоступен");
+  //try {
+  const response = await fetch(`/profile/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  console.log(result)
+
+  if (response.status) {
+    localStorage.clear();
+    return false;
+  } else {
+    alert("net nichego");
   }
+  //} catch (e) {
+  // console.message("Ошибка, сервер недоступен", e);
+  // }
 }
 
 const fetchRegister = async ({ name, email, password, repeadPassword }) => {
@@ -87,6 +91,8 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
   }
 }
 
+
+
 const getFetchSearchQuery = async (searchQuery) => {
   // console.log( 'searchQuery',searchQuery)
   try {
@@ -96,16 +102,16 @@ const getFetchSearchQuery = async (searchQuery) => {
     const latitude = coordinates[1]
     const longitude = coordinates[0]
 
-    console.log('result', result)
-    console.log('coordinates', coordinates)
-    console.log('latitude', latitude)
-    console.log('longitude', longitude)
+    // console.log('result', result)
+    // console.log('coordinates', coordinates)
+    // console.log('latitude', latitude)
+    // console.log('longitude', longitude)
     // let placemark = new YMaps.Placemark([latitude, longitude], {})
     // if (coordinates) Map.geoObjects.add(placemark);
     return [latitude, longitude];
   }
   catch (error) {
-
+    console.error(error.message)
   }
 }
 
@@ -127,7 +133,7 @@ function* logoutPage(action) {
     const logout = yield call(fetchLogout);
     console.log(logout);
     yield put(logoutFetch(logout));
-    yield put(history.push('/'))
+    //yield put(history.push('/'))
   } catch (error) {
     yield put(loadingError(error.message));
   }
@@ -144,14 +150,50 @@ function* registerPage(action) {
   }
 }
 
+const fetchPutCoordinates = async (obj) => {
+  return await (
+    await fetch("/upload/coordinates", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: obj.userId,
+        coordinates: obj.coordinates
+      }),
+    })
+  ).json();
+};
 
+const fetchMissedPpl = async () => {
+  return await (await fetch('/upload/missedpeople', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })).json()
+}
 
 function* addPointFetch(action) {
   try {
-    const coordinates = yield call(getFetchSearchQuery(action)) //[latitude, longitude]
-    const obj = { coordinates: coordinates, userId: action.userId }
+    const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
+    const obj = { coordinates: coordinates, userId: action.id }
+
+    const updated = yield call(fetchPutCoordinates, obj)
+    const poteryashes = yield call(fetchMissedPpl);
+    yield put(putCoordinates(poteryashes))
+    console.log(poteryashes)
   } catch (error) {
     yield put(loadingError(error.message));
+  }
+}
+
+function* setStateSaga(action) {
+  try {
+    const poteryashes = yield call(fetchMissedPpl);
+    yield put(putCoordinates(poteryashes))
+  } catch (e) {
+    yield put(loadingError(e.message))
   }
 }
 
@@ -162,6 +204,7 @@ function* saga() {
   yield takeEvery(actionTypes.logoutSaga, logoutPage);
   yield takeEvery(actionTypes.registerSaga, registerPage);
   yield takeEvery(ADD_POINT, addPointFetch);
+  yield takeEvery(SET_SAGA_STATE, setStateSaga)
   // action chto bi poluchit pointi
 }
 

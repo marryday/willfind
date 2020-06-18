@@ -12,7 +12,11 @@ const bcrypt = require('bcrypt');
 const cors = require("cors")
 const uploadRouter = require('./routes/upload')
 const profileRouter = require('./routes/profile');
+
+
 const app = express();
+const bodyParser = require('body-parser')
+
 
 // Подключаем mongoose.
 const mongoose = require('mongoose');
@@ -22,23 +26,30 @@ mongoose.connect('mongodb://localhost:27017/WillFind', {
 });
 
 // view engine setup
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'templates', 'views'));
-hbs.registerPartials(path.join(__dirname, 'templates', 'partials'));
+//app.set('view engine', 'hbs');
+//app.set('views', path.join(__dirname, 'templates', 'views'));
+//hbs.registerPartials(path.join(__dirname, 'templates', 'partials'));
 
 app.use(logger('dev'));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 //--------------------------------------
 
 app.use(fileUpload()); //возможность загружать файлы
 
 //--------------------------------------
-app.use(cors());
+//app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000"],
+    optionsSuccessStatus: 200
+  })
+);
 
 app.use(
   session({

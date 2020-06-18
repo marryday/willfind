@@ -1,15 +1,19 @@
-import React, { useState} from "react";
-import {useHistory} from 'react-router'
-
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "@material-ui/core/Button";
+import { addPoint } from "../redux/actions";
+import CropForm from './Avatar'
+import './AvatarStyle.css'
 export default () => {
-  const history = useHistory()
+  const url = useSelector(state => state.reducer.src)
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [authorName, setAuthorName] = useState("");
   const [authorTel, setTel] = useState("");
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [terrain, setTerrain] = useState("");
-  const [location, setLocation] = useState("");
-  const [img, setImg] = useState("");
   const [birthday, setBirthday] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
@@ -19,18 +23,21 @@ export default () => {
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
 
+  const [addressOfLost, setAddressOfLost] = useState('')
+
+  const [searchQuery, SetSearchQuery] = useState("");
+
+  const handleInput = (event) => {
+    setAddressOfLost(event.target.value);
+    SetSearchQuery(event.target.value);
+    console.log(addressOfLost, searchQuery)
+  };
+
+
+
   const submitHandler = async (e) => {
     console.log("123");
     try {
-      const formData = new FormData();
-      formData.append("file", img);
-      const res = await (
-        await fetch("/upload", {
-          method: "POST",
-          body: formData,
-        })
-      ).json();
-
       const result = await (
         await fetch("/upload/missedperson", {
           method: "POST",
@@ -42,9 +49,8 @@ export default () => {
             authorTel: authorTel,
             name: name,
             terrain: terrain,
-            location: location,
             gender: gender,
-            img: res.filePath,
+            img: url,
             birthday: birthday,
             description: description,
             health: health,
@@ -53,16 +59,19 @@ export default () => {
             more: more,
             specificMarks: specificMarks,
             time,
-            author: localStorage.getItem('userId')
+            author: localStorage.getItem("userId"),
+            addressOfLost: searchQuery,
           }),
         })
       ).json();
-     if(result.ok === 'ok'){
-       history.goBack()
-     }
+      dispatch(addPoint(searchQuery, result._id));
     } catch (e) {
-      console.error(e.message);
+      console.error(e.message)
     }
+    // if (result.ok === "ok") {
+    //   history.goBack();
+    // }
+
   };
   return (
     <div
@@ -124,11 +133,7 @@ export default () => {
         onChange={(e) => setBirthday(e.target.value)}
       ></input>
       <p>Адрес пропажи</p>
-      <input
-        type="text"
-        name="address"
-        onChange={(e) => setLocation(e.target.value)}
-      ></input>
+      <input type="text" name="inputСoordinates" onChange={(e) => handleInput(e)} />
       <p>Местность пропажи</p>
       <input
         type="text"
@@ -171,22 +176,22 @@ export default () => {
         onChange={(e) => setStuff(e.target.value)}
       />
       <p> Фотография пропавшего </p>
-      <input
-        type="file"
-        onChange={(e) => {
-          e.preventDefault();
-          setImg(e.target.files[0]);
-        }}
-      />
+      <CropForm />
       <p>Дополнительная информация</p>
       <input
         type="text"
         name="more"
         onChange={(e) => setMore(e.target.value)}
       />
-      <button type="button" onClick={(e) => submitHandler(e)}>
+
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(e) => submitHandler(e)}
+      >
         Создать
-      </button>
+      </Button>
     </div>
   );
 };
