@@ -6,6 +6,7 @@ const initialState = {
   errorMessage: null,
   loginSessions: false,
   src: null,
+  person: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -60,7 +61,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         src: action.src,
       };
-
+    case actionTypes.missedPersonFetch:
+      return {
+        ...state,
+        person: action.person,
+      };
     default:
       return state;
   }

@@ -72,8 +72,12 @@ code {
   margin: 20px;
 }
 
+.oneListFindPaper{
+  width: 500px;
+}
+
 .oneListFind img{
-  width:100px;
+  width:130px;
   height: 130px;
   margin: 10px ;
 }

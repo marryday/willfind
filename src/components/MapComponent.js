@@ -2,24 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactDOM from "react-dom";
 import { YMaps, Map, Clusterer, Placemark } from "../ymaps";
-import points from "./points.json";
+// import points from "./points.json";
 import testPoints from './testPoints.json'
-
 import Button from "@material-ui/core/Button";
 import { addPoint } from "../redux/actions";
 import { setSagaState } from '../redux/actions'
-
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
-
 // import "../styles.css";
-
 const mapState = {
   center: [55.751574, 37.573856],
   zoom: 9,
   behaviors: ["default", "scrollZoom"],
   coordinates: []
 };
-
 const getPointData = (
   firstName,
   lastName,
@@ -42,16 +37,13 @@ const getPointData = (
       Перейти в профиль,<a href="/people/${id}"> подробнее...</a>,
       </address>`,
     clusterCaption: ` <strong> ${firstName} ${lastName} ${middleName}</strong>`
-
   };
 };
-
 const getPointOptions = () => {
   return {
     preset: "islands#violetIcon"
   };
 };
-
 export default function MapComponent() {
   const dispatch = useDispatch();
   const [searchQuery, SetSearchQuery] = useState('')
@@ -62,7 +54,7 @@ export default function MapComponent() {
   useEffect(() => {
     dispatch(setSagaState())
   }, [])
-  const personsObjectArray = useSelector((state)=>state.mapReducer.points)
+  const personsObjectArray = useSelector((state) => state.mapReducer.points)
   console.log(personsObjectArray)
 
   // useFetching()
@@ -74,15 +66,12 @@ export default function MapComponent() {
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
   }
-
   const getInputValue = (event) => {
     event.preventDefault();
   }
-
   //poluchit' pointi
   useEffect(() => {
   }, [])
-
   return (
     <>
       <div className="AppMap">
@@ -141,6 +130,3 @@ export default function MapComponent() {
     </>
   );
 }
-
-
-

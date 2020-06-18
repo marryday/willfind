@@ -45,12 +45,12 @@ export default function ButtonAppBar() {
               <Button><Link to='/map' className="aNav">MAP</Link></Button>
               <Link to='/profile' className="aNav">{userName} </Link>
               <Link to='/profile/logout' className="aNav" onClick={() => dispatch(logoutSaga())}>LOGOUT</Link>
-              <Toogle />
+              {/* <Toogle /> */}
             </> :
             <>
               <Link to='/map' className="aNav" color="inherit">MAP</Link>
               <Link to='/login' className="aNav" color="inherit">LOGIN</Link>
-              <Toogle />
+              {/* <Toogle /> */}
             </>}
         </Toolbar>
       </AppBar>

@@ -27,6 +27,8 @@ import Checkout from './profileHelpers/yourData/Checkout';
 import CreateMissed from '../CreateMissed';
 import Map from '../map';
 import AddNewPoteryah from './profileHelpers/addNew/AddNewPoteryash';
+import AddressForm from './profileHelpers/addNew/AddressForm';
+
 
 function Copyright() {
   return (
@@ -206,27 +208,6 @@ export const Profile = () => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/*<AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>*/}
-      {/*  <Toolbar className={classes.toolbar}>*/}
-      {/*    <IconButton*/}
-      {/*      edge="start"*/}
-      {/*      color="inherit"*/}
-      {/*      aria-label="open drawer"*/}
-      {/*      onClick={handleDrawerOpen}*/}
-      {/*      className={clsx(classes.menuButton, open && classes.menuButtonHidden)}*/}
-      {/*    >*/}
-      {/*      <MenuIcon />*/}
-      {/*    </IconButton>*/}
-      {/*    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>*/}
-      {/*      Dashboard*/}
-      {/*    </Typography>*/}
-      {/*    <IconButton color="inherit">*/}
-      {/*      <Badge badgeContent={4} color="secondary">*/}
-      {/*        <NotificationsIcon />*/}
-      {/*      </Badge>*/}
-      {/*    </IconButton>*/}
-      {/*  </Toolbar>*/}
-      {/*</AppBar>*/}
       <Drawer
         variant="permanent"
         classes={{
@@ -257,12 +238,33 @@ export const Profile = () => {
             {/* Recent Orders */}
             {found ? <Grid item xs={12}><Paper className={classes.paper}><Orders /></Paper></Grid> : null}
             {yourData ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Checkout /></Paper></Grid> : null}
-            {addNew ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><AddNewPoteryah /></Paper></Grid> : null}
+            {addNew ? <Grid item xs={12} md={4} lg={10}><Paper className={classes.fixedPaddings}><AddressForm /></Paper></Grid> : null}
             {poteryashki ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Map /></Paper></Grid> : null}
           </Grid>
         </Container>
-        <CreateMissed />
       </main>
     </div>
   );
 }
+
+{/*<AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>*/ }
+{/*  <Toolbar className={classes.toolbar}>*/ }
+{/*    <IconButton*/ }
+{/*      edge="start"*/ }
+{/*      color="inherit"*/ }
+{/*      aria-label="open drawer"*/ }
+{/*      onClick={handleDrawerOpen}*/ }
+{/*      className={clsx(classes.menuButton, open && classes.menuButtonHidden)}*/ }
+{/*    >*/ }
+{/*      <MenuIcon />*/ }
+{/*    </IconButton>*/ }
+{/*    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>*/ }
+{/*      Dashboard*/ }
+{/*    </Typography>*/ }
+{/*    <IconButton color="inherit">*/ }
+{/*      <Badge badgeContent={4} color="secondary">*/ }
+{/*        <NotificationsIcon />*/ }
+{/*      </Badge>*/ }
+{/*    </IconButton>*/ }
+{/*  </Toolbar>*/ }
+{/*</AppBar>*/ }

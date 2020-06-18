@@ -14,8 +14,6 @@ export default () => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [terrain, setTerrain] = useState("");
-  const [location, setLocation] = useState("");
-  const [img, setImg] = useState("");
   const [birthday, setBirthday] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
@@ -24,12 +22,15 @@ export default () => {
   const [stuff, setStuff] = useState("");
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
-  // const [filePath, setFilePath] = useState('');
+
+  const [addressOfLost, setAddressOfLost] = useState('')
 
   const [searchQuery, SetSearchQuery] = useState("");
 
   const handleInput = (event) => {
+    setAddressOfLost(event.target.value);
     SetSearchQuery(event.target.value);
+    console.log(addressOfLost, searchQuery)
   };
 
 
@@ -37,18 +38,6 @@ export default () => {
   const submitHandler = async (e) => {
     console.log("123");
     try {
-
-
-      // const formData = new FormData();
-      // formData.append("file", img);
-      // const res = await (
-      //   await fetch("/upload", {
-      //     method: "POST",
-      //     body: formData,
-      //   })
-      // ).json()
-
-
       const result = await (
         await fetch("/upload/missedperson", {
           method: "POST",
@@ -60,7 +49,6 @@ export default () => {
             authorTel: authorTel,
             name: name,
             terrain: terrain,
-            location: location,
             gender: gender,
             img: url,
             birthday: birthday,
@@ -72,6 +60,7 @@ export default () => {
             specificMarks: specificMarks,
             time,
             author: localStorage.getItem("userId"),
+            addressOfLost: searchQuery,
           }),
         })
       ).json();
@@ -144,7 +133,7 @@ export default () => {
         onChange={(e) => setBirthday(e.target.value)}
       ></input>
       <p>Адрес пропажи</p>
-      <input type="text" name="inputСoordinates" onChange={handleInput} />
+      <input type="text" name="inputСoordinates" onChange={(e) => handleInput(e)} />
       <p>Местность пропажи</p>
       <input
         type="text"
@@ -187,7 +176,7 @@ export default () => {
         onChange={(e) => setStuff(e.target.value)}
       />
       <p> Фотография пропавшего </p>
-      <CropForm onChange={console.log(CropForm.dataUrl)} />
+      <CropForm />
       <p>Дополнительная информация</p>
       <input
         type="text"

@@ -7,6 +7,7 @@ import {
   registerFetch,
   loadingStart,
   loadingError,
+  missedPersonFetch
 } from "../actionCreators/actionCreatorSaga";
 import {addPoint, setSagaState, showAlert} from "../redux/actions";
 import {ADD_POINT, SET_SAGA_STATE} from "../redux/types";
@@ -49,7 +50,6 @@ const fetchLogout = async () => {
     },
   });
   const result = await response.json();
-  console.log(result)
 
   if (response.status) {
     localStorage.clear();
@@ -186,6 +186,20 @@ const fetchMissedPpl = async () => {
   })).json()
 }
 
+const personFetch = async (url) => {
+  const response = await fetch('/upload/missedpersonOne', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+      id: url,
+    }),
+  })
+  const result = await response.json();
+  return result;
+}
+
 function* addPointFetch(action) {
   try {
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
@@ -209,6 +223,16 @@ function* setStateSaga(action) {
   }
 }
 
+function* missedPersonPage(action) {
+  try {
+    const result = yield call(personFetch, action.id);
+    yield put(missedPersonFetch(result))
+  } catch (e) {
+    yield put(loadingError(e.message))
+  }
+}
+
+
 
 // Функция-наблюдатель.
 function* saga() {
@@ -217,6 +241,7 @@ function* saga() {
   yield takeEvery(actionTypes.registerSaga, registerPage);
   yield takeEvery(ADD_POINT, addPointFetch);
   yield takeEvery(SET_SAGA_STATE, setStateSaga)
+  yield takeEvery(actionTypes.missedPersonSaga, missedPersonPage)
   // action chto bi poluchit pointi
 }
 

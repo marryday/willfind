@@ -8,4 +8,6 @@ export default {
   loadingError: "loadingError",
   loadToDoSaga: "loadToDoSaga",
   registerSaga: "registerSaga",
-};
+  missedPersonSaga: "missedPersonSaga",
+  missedPersonFetch: "missedPersonFetch",
+}
