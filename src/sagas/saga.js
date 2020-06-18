@@ -288,6 +288,7 @@ function* saga() {
   yield takeEvery(actionTypes.loginSaga, loginPage);
   yield takeEvery(actionTypes.logoutSaga, logoutPage);
   yield takeEvery(actionTypes.registerSaga, registerPage);
+  yield takeEvery(actionTypes.missedPersonSaga, missedPersonPage)
   yield takeEvery(ADD_POINT, addPointFetch);
   yield takeEvery(SET_SAGA_STATE, setStateSaga);
   yield takeEvery(UPDATE_USER, updateUser);
