@@ -187,4 +187,10 @@ router.post("/update", async (req, res) => {
   res.json(user);
 });
 
+
+router.get('/update/:id', async (req, res) => {
+  const user = await User.findById(req.params.id);
+  console.log(user)
+  res.json(user)
+})
 module.exports = router;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +11,12 @@ export default function AddressForm() {
   const [name, setName] = useState('')
   const [lastName, setLastName] = useState('');
   const [searchQuery, SetSearchQuery] = useState("");
- 
+  const id = localStorage.getItem('userId')
+  useEffect(() => {
+    fetch(`profile/update/${id}`,{
+      method:'GET'
+    }).then(result => result.json().then(data => {setName(data.firstName); setLastName(data.lastName); SetSearchQuery(data.address)}))}, [])
+
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
     const user = {
@@ -34,6 +39,7 @@ export default function AddressForm() {
             id="firstName"
             name="firstName"
             label="Имя"
+            value={name}
             fullWidth
             autoComplete="given-name"
             onChange={e => setName(e.target.value)}
@@ -44,6 +50,7 @@ export default function AddressForm() {
             required
             onChange={e => setLastName(e.target.value)}
             id="lastName"
+            value={lastName}
             name="lastName"
             label="Фамилия"
             fullWidth
@@ -54,6 +61,7 @@ export default function AddressForm() {
           <TextField
             onChange={(e) => handleInput(e)}
             required
+            value={searchQuery}
             id="address1"
             name="address1"
             label="Адрес"

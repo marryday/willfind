@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -12,7 +12,12 @@ export default function PaymentForm() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  
+  const id = localStorage.getItem('userId')
+  useEffect(() => {
+    fetch(`profile/update/${id}`,{
+      method:'GET'
+    }).then(result => result.json().then(data => {setLogin(data.login); setEmail(data.email)}))}, [])
+
   const handleInput = (e) => {
     const payment = {
       login,
@@ -29,7 +34,7 @@ export default function PaymentForm() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField required id="login" label="Логин" fullWidth onChange={e => setLogin(e.target.value)} />
+          <TextField required id="login" label="Логин" value={login}fullWidth onChange={e => setLogin(e.target.value)} />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -41,7 +46,7 @@ export default function PaymentForm() {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="password" label="Пароль" type="password" fullWidth onChange={e => setPassword(e.target.value)}/>
+          <TextField required id="password" label="Пароль" type="password" value={password} fullWidth onChange={e => setPassword(e.target.value)}/>
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField onChange={e => handleInput(e)}
