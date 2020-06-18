@@ -1,4 +1,13 @@
-import { ADD_POINT, PUT_COORDINATES, SET_IMAGE, SET_SAGA_STATE } from "./types";
+import {
+  ADD_POINT,
+  HIDE_ALERT,
+  HIDE_LOADER,
+  PUT_COORDINATES,
+  SET_IMAGE,
+  SET_SAGA_STATE,
+  SHOW_ALERT,
+  SHOW_LOADER
+} from "./types";
 
 export function addPoint(payload, id) {
   return {
@@ -21,4 +30,33 @@ export function setImage(payload) {
 
 export function setSagaState() {
   return { type: SET_SAGA_STATE };
+}
+export function showLoader() {
+  return {
+    type: SHOW_LOADER,
+  }
+}
+
+export function hideLoader() {
+  return {
+    type: HIDE_LOADER,
+  }
+}
+
+export function showAlert(text) {
+  return {
+      type: SHOW_ALERT,
+      payload: text
+    }
+
+    // setTimeout(() => {
+    //   dispatch(hideAlert())
+    // }, 3000)
+
+}
+
+export function hideAlert() {
+  return {
+    type: HIDE_ALERT,
+  }
 }
