@@ -14,7 +14,6 @@ import { ADD_POINT, SET_SAGA_STATE, UPDATE_USER } from "../redux/types";
 import { putCoordinates } from "../redux/actions";
 const TOKEN = "ac85ebda-7107-4441-88aa-069cf0857ea8";
 
-
 const fetchLogin = async ({ email, password }) => {
   try {
     const response = await (
@@ -91,8 +90,7 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
       alert("Ошибка, сервер недоступен");
     }
   }
-}
-
+};
 
 const getFetchSearchQuery = async (searchQuery) => {
   // console.log( 'searchQuery',searchQuery)
@@ -291,8 +289,7 @@ function* saga() {
   yield takeEvery(actionTypes.logoutSaga, logoutPage);
   yield takeEvery(actionTypes.registerSaga, registerPage);
   yield takeEvery(ADD_POINT, addPointFetch);
-  yield takeEvery(SET_SAGA_STATE, setStateSaga)
-  yield takeEvery(actionTypes.missedPersonSaga, missedPersonPage)
+  yield takeEvery(SET_SAGA_STATE, setStateSaga);
   yield takeEvery(UPDATE_USER, updateUser);
   // action chto bi poluchit pointi
 }

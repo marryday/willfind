@@ -26,7 +26,7 @@ export default function Deposits() {
       <Title>Ваш поиск</Title>
 
       <Typography color="textSecondary" className={classes.depositContext}>
-        <Avatar alt="Иванов Адам" src="https://i.ibb.co/HPnBx0F/2020-06-12-18-33-18.png" className={classes.large} />
+        <Avatar alt="Иванов Адам" src="https://doorinworld.ru/upload/iblock/aec/poluchil_subsidiju.jpg" className={classes.large} />
       </Typography>
       <Typography component="p" variant="h6">
         Иванов Адам
