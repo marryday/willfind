@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { Profile } from "./components/user/Profile";
 import NavBar from "./components/nav";
 import Login from "./components/Login";
@@ -10,12 +10,16 @@ import History from "./heplers/history"
 import PoteryashList from './components/PoteryshList'
 import CreateMissed from './components/CreateMissed'
 import Chat from './components/Chat'
+import MainPage from './components/mainPage/MainPage'
 
 function App() {
   return (
     <Router history={History}>
       <NavBar />
-      <Route exact path="/"></Route>
+
+      <Route exact path="/">
+        <MainPage />
+      </Route>
       <Route exact path="/login">
         <Login />
       </Route>
@@ -37,9 +41,10 @@ function App() {
       <Route exact path="/people/:id">
         <Chat />
       </Route>
-      <Route path="/404">
+      {/* <Route>
         <NotFound404 />
-      </Route>
+      </Route> */}
+
       {/*<Redirect to={'/404'}></Redirect>*/}
       {/*<Route render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>} />*/}
     </Router>

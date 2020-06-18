@@ -53,7 +53,7 @@ export default function RegisterUser() {
 
   return (
     <>
-      <Container  component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs">
 
         <CssBaseline />
         <div className={"classes.paper}"} >
@@ -118,7 +118,10 @@ export default function RegisterUser() {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={() => dispatch(registerSaga(state.name, state.email, state.password, state.repeadPassword))}
+              onClick={() => {
+                console.log(state.name, state.email, state.password, state.repeadPassword);
+                dispatch(registerSaga(state.name, state.email, state.password, state.repeadPassword))
+              }}
             >
               Зарегистироваться
           </Button>
@@ -127,6 +130,7 @@ export default function RegisterUser() {
         <Box mt={8}>
           <Copyright />
         </Box>
+
       </Container>
     </>
   );

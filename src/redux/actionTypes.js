@@ -8,6 +8,8 @@ export default {
   loadingError: "loadingError",
   loadToDoSaga: "loadToDoSaga",
   registerSaga: "registerSaga",
+  registerFetch: "registerFetch",
   missedPersonSaga: "missedPersonSaga",
   missedPersonFetch: "missedPersonFetch",
-}
+  setAddress: 'setAddress',
+};
