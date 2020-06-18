@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ReactDOM from "react-dom";
-import { YMaps, Map, Clusterer, Placemark } from "../ymaps";
-// import points from "./points.json";
-import testPoints from './testPoints.json'
-import Button from "@material-ui/core/Button";
-import { addPoint } from "../redux/actions";
-import { setSagaState } from '../redux/actions'
-const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
-// import "../styles.css";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {YMaps, Map, Clusterer, Placemark} from "../ymaps";
+import {setSagaState} from '../redux/actions'
+
 const mapState = {
   center: [55.751574, 37.573856],
   zoom: 9,
@@ -22,17 +16,24 @@ const getPointData = (
   birthDate,
   clothes,
   timeOfLost,
-  id) => {
+  id,
+  image) => {
   return {
     balloonContentBody:
       `<address>
       <strong>${firstName} ${lastName} ${middleName}</strong>,
       <br/>
-      Год рождения: ${birthDate},
+      <img 
+      alt="Remy Sharp"
+       src="${image}" 
+       />
+    <br/>
+    
+      Год рождения: ${birthDate}, 
       <br/>
       Дата пропажи: ${timeOfLost},
        <br/>
-      Комментарии: ${clothes},
+      Во что был одет: ${clothes},
       <br/>
       Перейти в профиль,<a href="/people/${id}"> подробнее...</a>,
       </address>`,
@@ -47,21 +48,14 @@ const getPointOptions = () => {
 export default function MapComponent() {
   const dispatch = useDispatch();
   const [searchQuery, SetSearchQuery] = useState('')
-  const obj = { type: 'SET_STATE' }
+  const obj = {type: 'SET_STATE'}
 
-  // const useFetching = (someFetchActionCreator) => {
-  //   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setSagaState())
   }, [])
   const personsObjectArray = useSelector((state) => state.mapReducer.points)
   console.log(personsObjectArray)
 
-  // useFetching()
-  // useEffect(() => {
-  //   dispatch(obj);
-
-  // }, [])
 
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
@@ -69,7 +63,7 @@ export default function MapComponent() {
   const getInputValue = (event) => {
     event.preventDefault();
   }
-  //poluchit' pointi
+
   useEffect(() => {
   }, [])
   return (
@@ -86,20 +80,11 @@ export default function MapComponent() {
                 geoObjectHideIconOnBalloonOpen: false
               }}
             >
-              {/*{points.map((coordinates, idx) => {*/}
-              {/*  console.log(coordinates)*/}
-              {/*  return <Placemark*/}
-              {/*    key={idx}*/}
-              {/*    geometry={{coordinates}}*/}
-              {/*    properties={getPointData(idx)}*/}
-              {/*    options={getPointOptions()}*/}
-              {/*  />*/}
-              {/*})}*/}
 
               {personsObjectArray.length > 0 && personsObjectArray.map((objUser, idx) => {
                 return <Placemark
                   key={objUser._id}
-                  geometry={{ coordinates: objUser.coordinates }}
+                  geometry={{coordinates: objUser.coordinates}}
                   properties={
                     getPointData(
                       objUser.firstName,
@@ -108,7 +93,8 @@ export default function MapComponent() {
                       objUser.birthDate,
                       objUser.clothes,
                       objUser.timeOfLost,
-                      objUser._id
+                      objUser._id,
+                      objUser.image
                     )}
                   options={getPointOptions()}
                 />
@@ -117,16 +103,6 @@ export default function MapComponent() {
           </Map>
         </YMaps>
       </div>
-      {/*<form onSubmit={(event) => {*/}
-      {/*  event.preventDefault();*/}
-      {/*  dispatch(addPoint(searchQuery))*/}
-      {/*}}>*/}
-      {/*  <input type='text' name='inputСoordinates' onChange={handleInput} />*/}
-      {/*  <Button variant="contained" color="primary" type='submit'>*/}
-      {/*    Добавить точку*/}
-      {/*  </Button>*/}
-      {/*</form>*/}
-      {/*{searchQuery}*/}
     </>
   );
 }
