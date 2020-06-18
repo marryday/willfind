@@ -99,7 +99,8 @@ export default function AddressForm() {
   const [stuff, setStuff] = useState("");
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
-  const [value, setValue] = React.useState('female');
+  const [value, setValue] = React.useState('Male');
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -137,7 +138,7 @@ export default function AddressForm() {
             name: name,
             terrain: terrain,
             location: location,
-            gender: gender,
+            gender: value,
             img: url,
             birthday: birthday,
             description: description,
@@ -204,13 +205,14 @@ export default function AddressForm() {
           <FormControl component="fieldset">
             <FormLabel component="legend">Пол:</FormLabel>
             <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-              <FormControlLabel value="male" control={<StyledRadio />} label="Мужской" />
-              <FormControlLabel value="female" control={<StyledRadio />} label="Женский" />
+              <FormControlLabel value="Male" control={<StyledRadio />} label="Мужской" />
+              <FormControlLabel value="Female" control={<StyledRadio />} label="Женский" />
             </RadioGroup>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={5}>
-          Дата рождения:<TextField id="date" name="date" type="date" label="" onChange={(e) => setBirthday(e.target.value)} fullWidth />
+          Дата рождения:<TextField id="date" name="date" type="date" label=""
+            onChange={(e) => setBirthday(e.target.value)} fullWidth />
         </Grid>
 
         <Grid item xs={12} >
