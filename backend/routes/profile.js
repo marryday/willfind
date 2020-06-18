@@ -120,6 +120,8 @@ router.post("/signin", async (req, res) => {
 //POST: Регистрация пользователя
 router.post("/signup", async (req, res) => {
   const { login, email, password } = req.body;
+  console.log('signup')
+  console.log('req.body',req.body)
   const findLogin = await User.findOne({ login: login });
   const findEmail = await User.findOne({ email: email });
 
@@ -128,16 +130,25 @@ router.post("/signup", async (req, res) => {
     let booleanEmail = findEmail ? true : false;
 
     if (booleanLogin && booleanEmail) {
-      res.locals.registerError = { message: "Login  и Email уже существуют" };
-      res.render("profile/register");
+      res.json({status: false, message: "Такой аккаунт уже существует" });
+      console.log(1)
     } else if (booleanLogin) {
-      res.locals.registerError = { message: "Login уже существует" };
-      res.render("profile/register");
+      res.json({status: false, message: "Login уже существует" });
+      console.log(2)
     } else {
-      res.locals.registerError = { message: "Email уже существует" };
-      res.render("profile/register");
+      res.json({status: false, message: "Email уже существует" });
+      console.log(3)
     }
-  } else {
+  }
+   else if(
+    !req.body.login == undefined  ||
+    !req.body.email  == undefined ||
+    !req.body.password  == undefined ||
+    !req.body.repeadPassword == undefined
+){
+    res.json({status: false, message: "Поля не должны быть пустыми" });
+  }
+  else {
     const newUser = new User({
       login,
       email,

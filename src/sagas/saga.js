@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import {call, put, takeEvery} from "redux-saga/effects";
 import actionTypes from "../redux/actionTypes";
 import history from '../heplers/history'
 import {
@@ -8,13 +8,14 @@ import {
   loadingStart,
   loadingError,
 } from "../actionCreators/actionCreatorSaga";
-import { addPoint, setSagaState } from "../redux/actions";
-import { ADD_POINT, SET_SAGA_STATE } from "../redux/types";
-import { putCoordinates } from '../redux/actions'
+import {addPoint, setSagaState, showAlert} from "../redux/actions";
+import {ADD_POINT, SET_SAGA_STATE} from "../redux/types";
+import {putCoordinates} from '../redux/actions'
+
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
-const fetchLogin = async ({ email, password }) => {
+const fetchLogin = async ({email, password}) => {
   try {
     const response = await (await fetch(`/profile/signin`, {
       method: "POST",
@@ -61,7 +62,7 @@ const fetchLogout = async () => {
   // }
 }
 
-const fetchRegister = async ({ name, email, password, repeadPassword }) => {
+const fetchRegister = async ({name, email, password, repeadPassword}) => {
   const login = name;
   if (password === repeadPassword) {
     try {
@@ -77,20 +78,19 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
           repeadPassword
         }),
       })).json();
-      if (response) {
+      if (response.status) {
         localStorage.setItem("userSession", response.status);
         localStorage.setItem("userName", response.userSession.login);
         localStorage.setItem('userId', response.userSession.id)
         return response;
-      } else {
-        alert("net nichego");
+      } else if (!response.status) {
+        return response
       }
     } catch (e) {
       alert("Ошибка, сервер недоступен");
     }
   }
 }
-
 
 
 const getFetchSearchQuery = async (searchQuery) => {
@@ -109,8 +109,7 @@ const getFetchSearchQuery = async (searchQuery) => {
     // let placemark = new YMaps.Placemark([latitude, longitude], {})
     // if (coordinates) Map.geoObjects.add(placemark);
     return [latitude, longitude];
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error.message)
   }
 }
@@ -120,7 +119,7 @@ function* loginPage(action) {
   try {
     yield put(loadingStart());
 
-    const login = yield call(fetchLogin, { email: action.email, password: action.password });
+    const login = yield call(fetchLogin, {email: action.email, password: action.password});
     yield put(loginFetch(login));
     yield put(history.push('/profile'))
   } catch (error) {
@@ -141,10 +140,23 @@ function* logoutPage(action) {
 
 function* registerPage(action) {
   try {
-    const logout = yield call(fetchRegister, { name: action.name, email: action.email, password: action.password, repeadPassword: action.repeadPassword });
+    yield put(showAlert(null))
+
+    const logout = yield call(fetchRegister, {
+      name: action.name,
+      email: action.email,
+      password: action.password,
+      repeadPassword: action.repeadPassword
+    });
     console.log(logout);
+    if(!logout.status) {
+      console.log('hi1')
+      yield put(showAlert(logout.message))
+    } else {
+      console.log('hi2')
     yield put(registerFetch(logout));
     history.push('/profile')
+    }
   } catch (error) {
     yield put(loadingError(error.message));
   }
@@ -177,7 +189,7 @@ const fetchMissedPpl = async () => {
 function* addPointFetch(action) {
   try {
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
-    const obj = { coordinates: coordinates, userId: action.id }
+    const obj = {coordinates: coordinates, userId: action.id}
 
     const updated = yield call(fetchPutCoordinates, obj)
     const poteryashes = yield call(fetchMissedPpl);
@@ -207,7 +219,6 @@ function* saga() {
   yield takeEvery(SET_SAGA_STATE, setStateSaga)
   // action chto bi poluchit pointi
 }
-
 
 
 export default saga;
