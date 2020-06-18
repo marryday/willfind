@@ -11,4 +11,5 @@ export default {
   registerFetch: "registerFetch",
   missedPersonSaga: "missedPersonSaga",
   missedPersonFetch: "missedPersonFetch",
-}
+  setAddress: 'setAddress',
+};

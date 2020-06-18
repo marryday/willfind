@@ -31,7 +31,7 @@ router.post("/missedperson", async (req, res) => {
     const lastName = fio[0];
     const ages = getAges(String(req.body.birthday).slice(0, 4));
     const author = await User.findById(req.body.author);
-    console.log(req.body.url);
+    // console.log(req.body.url);
     const poteryash = await new Poteryash({
       authorName: req.body.authorName,
       authorTel: req.body.authorTel,
@@ -60,7 +60,7 @@ router.post("/missedperson", async (req, res) => {
     await author.save();
     res.json(poteryash);
   } catch (e) {
-    console.error(e.message);
+    // console.error(e.message);
     return res.status(500).send(e);
   }
 });
@@ -73,7 +73,7 @@ router.post('/missedpersonOne', async (req, res) => {
 router.get("/missedpeople", async (req, res) => {
   try {
     let ppl = await Poteryash.find();
-    console.log(ppl);
+    // console.log(ppl);
     res.json({ ppl });
   } catch (e) {
     res.status(500).json(e);
@@ -85,21 +85,23 @@ router.patch("/coordinates", async (req, res) => {
     const poteryash = await Poteryash.findById(req.body.id);
     poteryash.coordinates = req.body.coordinates;
     await poteryash.save();
-    console.log(poteryash);
+    // console.log(poteryash);
     res.json(poteryash);
   } catch (e) {
-    console.error(e.message);
+    // console.error(e.message);
     res.json(e);
   }
 });
 
-router.get("/countcoordinates", async (req, res) => {
+router.get("/countcoordinates/:id", async (req, res) => {
   try {
-    let user = await User.findById(req.body.user);
+    let user = await User.findById(req.params.id);
+    // console.log(user)
+    const userCoordinates = [Number(user.coordinates[0]), Number(user.coordinates[1])]
     let poteryashes = await Poteryash.find();
     let matches = poteryashes.filter(
       poteryashes.map((p) => p.coordinates[0] + p.coordinates[1]) -
-      (user.coordinates[0] + user.coordinates[1]) <
+      (userCoordinates[0] + userCoordinates[1]) <
       0.5
     );
     console.log(matches);
