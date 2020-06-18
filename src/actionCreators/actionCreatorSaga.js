@@ -13,6 +13,9 @@ export function logoutSaga() {
 export function registerSaga(name, email, password, repeadPassword) {
   return { type: actionTypes.registerSaga, name, email, password, repeadPassword }
 }
+export function missedPersonSaga(id) {
+  return { type: actionTypes.missedPersonSaga, id }
+}
 
 // Эти сага вызывает с помощью put() в тех или иных случаях.
 export function loadingStart() {
@@ -28,7 +31,6 @@ export function loadingError(errorMessage) {
 }
 
 export function loginFetch(email, password) {
-  console.log(email, password)
   return { type: actionTypes.loginFetch, email, password };
 }
 
@@ -38,4 +40,8 @@ export function logoutFetch(loginSessions) {
 
 export function registerFetch(name, email, password, repeadPassword) {
   return { type: actionTypes.registerFetch, name, email, password, repeadPassword };
+}
+
+export function missedPersonFetch(payload) {
+  return { type: actionTypes.missedPersonFetch, person: payload };
 }

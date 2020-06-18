@@ -38,7 +38,10 @@ router.post("/missedperson", async (req, res) => {
       firstName,
       lastName,
       middleName,
+      specificMarks: req.body.specificMarks,
+      terrain: req.body.terrain,
       sex: req.body.gender,
+      more: req.body.more,
       birthDate: req.body.birthday,
       addressOfLost: req.body.addressOfLost,
       timeOfLost: req.body.time,
@@ -61,6 +64,11 @@ router.post("/missedperson", async (req, res) => {
     return res.status(500).send(e);
   }
 });
+
+router.post('/missedpersonOne', async (req, res) => {
+  const user = await Poteryash.findById(req.body.id)
+  res.json(user)
+})
 
 router.get("/missedpeople", async (req, res) => {
   try {
