@@ -20,10 +20,9 @@ const getPointData = (
   lastName,
   middleName,
   birthDate,
-  timeOfLost,
   clothes,
+  timeOfLost,
   id) => {
-  console.log('name', firstName)
   return {
     balloonContentBody:
       `<address>
@@ -46,8 +45,6 @@ const getPointOptions = () => {
   };
 };
 export default function MapComponent() {
-
-
   const dispatch = useDispatch();
   const [searchQuery, SetSearchQuery] = useState('')
   const obj = { type: 'SET_STATE' }
@@ -57,6 +54,8 @@ export default function MapComponent() {
   useEffect(() => {
     dispatch(setSagaState())
   }, [])
+  const personsObjectArray = useSelector((state) => state.mapReducer.points)
+  console.log(personsObjectArray)
 
   // useFetching()
   // useEffect(() => {
@@ -97,9 +96,9 @@ export default function MapComponent() {
               {/*  />*/}
               {/*})}*/}
 
-              {testPoints.length > 0 && testPoints.map((objUser, idx) => {
+              {personsObjectArray.length > 0 && personsObjectArray.map((objUser, idx) => {
                 return <Placemark
-                  key={objUser.id}
+                  key={objUser._id}
                   geometry={{ coordinates: objUser.coordinates }}
                   properties={
                     getPointData(
@@ -109,7 +108,7 @@ export default function MapComponent() {
                       objUser.birthDate,
                       objUser.clothes,
                       objUser.timeOfLost,
-                      objUser.id
+                      objUser._id
                     )}
                   options={getPointOptions()}
                 />
@@ -118,16 +117,16 @@ export default function MapComponent() {
           </Map>
         </YMaps>
       </div>
-      <form onSubmit={(event) => {
-        event.preventDefault();
-        dispatch(addPoint(searchQuery))
-      }}>
-        <input type='text' name='inputСoordinates' onChange={handleInput} />
-        <Button variant="contained" color="primary" type='submit'>
-          Добавить точку
-        </Button>
-      </form>
-      {searchQuery}
+      {/*<form onSubmit={(event) => {*/}
+      {/*  event.preventDefault();*/}
+      {/*  dispatch(addPoint(searchQuery))*/}
+      {/*}}>*/}
+      {/*  <input type='text' name='inputСoordinates' onChange={handleInput} />*/}
+      {/*  <Button variant="contained" color="primary" type='submit'>*/}
+      {/*    Добавить точку*/}
+      {/*  </Button>*/}
+      {/*</form>*/}
+      {/*{searchQuery}*/}
     </>
   );
 }

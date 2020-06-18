@@ -190,7 +190,6 @@ function* addPointFetch(action) {
 
 function* setStateSaga(action) {
   try {
-
     const poteryashes = yield call(fetchMissedPpl);
     yield put(putCoordinates(poteryashes))
   } catch (e) {
