@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
         isLoading: null,
         loginSessions: true,
       };
-    case actionTypes.registerSaga:
+    case actionTypes.registerFetch:
       return {
         ...state,
         errorMessage: null,

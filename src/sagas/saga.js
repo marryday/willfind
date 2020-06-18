@@ -1,4 +1,4 @@
-import {call, put, takeEvery} from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import actionTypes from "../redux/actionTypes";
 import history from '../heplers/history'
 import {
@@ -9,14 +9,14 @@ import {
   loadingError,
   missedPersonFetch
 } from "../actionCreators/actionCreatorSaga";
-import {addPoint, setSagaState, showAlert} from "../redux/actions";
-import {ADD_POINT, SET_SAGA_STATE} from "../redux/types";
-import {putCoordinates} from '../redux/actions'
+import { addPoint, setSagaState, showAlert } from "../redux/actions";
+import { ADD_POINT, SET_SAGA_STATE } from "../redux/types";
+import { putCoordinates } from '../redux/actions'
 
 const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
 
 
-const fetchLogin = async ({email, password}) => {
+const fetchLogin = async ({ email, password }) => {
   try {
     const response = await (await fetch(`/profile/signin`, {
       method: "POST",
@@ -62,7 +62,7 @@ const fetchLogout = async () => {
   // }
 }
 
-const fetchRegister = async ({name, email, password, repeadPassword}) => {
+const fetchRegister = async ({ name, email, password, repeadPassword }) => {
   const login = name;
   if (password === repeadPassword) {
     try {
@@ -119,7 +119,7 @@ function* loginPage(action) {
   try {
     yield put(loadingStart());
 
-    const login = yield call(fetchLogin, {email: action.email, password: action.password});
+    const login = yield call(fetchLogin, { email: action.email, password: action.password });
     yield put(loginFetch(login));
     yield put(history.push('/profile'))
   } catch (error) {
@@ -142,20 +142,19 @@ function* registerPage(action) {
   try {
     yield put(showAlert(null))
 
-    const logout = yield call(fetchRegister, {
+    const result = yield call(fetchRegister, {
       name: action.name,
       email: action.email,
       password: action.password,
       repeadPassword: action.repeadPassword
     });
-    console.log(logout);
-    if(!logout.status) {
-      console.log('hi1')
-      yield put(showAlert(logout.message))
+    console.log(result);
+    if (!result.status) {
+      yield put(showAlert(result.message))
+      //history.push('/registration')
     } else {
-      console.log('hi2')
-    yield put(registerFetch(logout));
-    history.push('/profile')
+      yield put(registerFetch(result));
+      history.push('/profile')
     }
   } catch (error) {
     yield put(loadingError(error.message));
@@ -203,7 +202,7 @@ const personFetch = async (url) => {
 function* addPointFetch(action) {
   try {
     const coordinates = yield call(getFetchSearchQuery, action) //[latitude, longitude]
-    const obj = {coordinates: coordinates, userId: action.id}
+    const obj = { coordinates: coordinates, userId: action.id }
 
     const updated = yield call(fetchPutCoordinates, obj)
     const poteryashes = yield call(fetchMissedPpl);
