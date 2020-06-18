@@ -185,7 +185,7 @@ router.post("/logout", (req, res) => {
 });
 
 router.post("/update", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const user = await User.findById(req.body.id);
   user.login = req.body.login;
   user.password = await bcrypt.hash(req.body.password, 10);
@@ -194,7 +194,7 @@ router.post("/update", async (req, res) => {
   user.address = req.body.address;
   user.coordinates = req.body.coordinates;
   user.email = req.body.email;
-  console.log(user)
+  // console.log(user)
   await user.save();
   res.json(user);
 });
@@ -202,7 +202,7 @@ router.post("/update", async (req, res) => {
 
 router.get('/update/:id', async (req, res) => {
   const user = await User.findById(req.params.id);
-  console.log(user)
+  // console.log(user)
   res.json(user)
 })
 module.exports = router;

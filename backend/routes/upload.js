@@ -65,10 +65,10 @@ router.post("/missedperson", async (req, res) => {
   }
 });
 
-router.post('/missedpersonOne', async (req, res) => {
-  const user = await Poteryash.findById(req.body.id)
-  res.json(user)
-})
+router.post("/missedpersonOne", async (req, res) => {
+  const user = await Poteryash.findById(req.body.id);
+  res.json(user);
+});
 
 router.get("/missedpeople", async (req, res) => {
   try {
@@ -97,14 +97,46 @@ router.get("/countcoordinates/:id", async (req, res) => {
   try {
     let user = await User.findById(req.params.id);
     // console.log(user)
-    const userCoordinates = [Number(user.coordinates[0]), Number(user.coordinates[1])]
+    const userCoordinates = [
+      Number(user.coordinates[0]),
+      Number(user.coordinates[1]),
+    ];
+
+    const sumUserCoordinates = userCoordinates[0] + userCoordinates[1];
     let poteryashes = await Poteryash.find();
-    let matches = poteryashes.filter(
-      poteryashes.map((p) => p.coordinates[0] + p.coordinates[1]) -
-      (userCoordinates[0] + userCoordinates[1]) <
-      0.5
+    poteryashes.forEach(p => p.sumCoordinates = Number(p.coordinates[0]) + Number(p.coordinates[1]))
+
+  
+    const func2 = (number, arr) => {
+      return arr.filter(item => (item - number) <= 0.1)
+  }
+
+  
+    const coordinates = poteryashes.map(
+      (p) => Number(p.coordinates[0]) + Number(p.coordinates[1])
     );
-    console.log(matches);
+    const result = coordinates.filter((el) => Math.abs(el - sumUserCoordinates < 0.1));
+      // console.log(result)
+    
+      const nashel = poteryashes.filter(p => p.sumCoordinates === result[0])
+    
+      // const nashel = poteryashes.filter(p => func2(p.sumCoordinates, result))
+    console.log(nashel)
+    
+    //  poteryashes.map(p => p.coordinates.forEach(e =>  result.push(Number(e))));
+    // console.log(result)
+    // console.log(res);
+    // const xy =  matches.forEach(Number(e) => e.reduce((sum, current) => {
+    //    return sum + current;
+    //   }, 0))
+    //  console.log(xy)
+    // console.log(matches);
+    // Math.abs(Number(el) - (userCoordinates[0] + userCoordinates[1])) < 1
+    // )
+
+    // el.reduce((sum, current) => {
+    //   return sum + current;
+    // }, 0)))
   } catch (e) {
     res.json(e);
   }
