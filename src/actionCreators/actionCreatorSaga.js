@@ -34,8 +34,8 @@ export function loginFetch(email, password) {
   return { type: actionTypes.loginFetch, email, password };
 }
 
-export function logoutFetch(loginSessions) {
-  return { type: actionTypes.logoutFetch, loginSessions };
+export function logoutFetch() {
+  return { type: actionTypes.logoutFetch };
 }
 
 export function registerFetch(name, email, password, repeadPassword) {

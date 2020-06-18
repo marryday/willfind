@@ -9,19 +9,11 @@ import {
   loadingError,
   missedPersonFetch
 } from "../actionCreators/actionCreatorSaga";
-<<<<<<< HEAD
 import { addPoint, setSagaState, showAlert } from "../redux/actions";
-import { ADD_POINT, SET_SAGA_STATE } from "../redux/types";
-import { putCoordinates } from '../redux/actions'
-
-const TOKEN = 'ac85ebda-7107-4441-88aa-069cf0857ea8';
-
-=======
-import { addPoint, setSagaState } from "../redux/actions";
 import { ADD_POINT, SET_SAGA_STATE, UPDATE_USER } from "../redux/types";
 import { putCoordinates } from "../redux/actions";
 const TOKEN = "ac85ebda-7107-4441-88aa-069cf0857ea8";
->>>>>>> 1ca7f623faa7a7d2cd81e80b901dd511c19bf89f
+
 
 const fetchLogin = async ({ email, password }) => {
   try {
@@ -59,10 +51,6 @@ const fetchLogout = async () => {
     },
   });
   const result = await response.json();
-<<<<<<< HEAD
-=======
-  console.log(result);
->>>>>>> 1ca7f623faa7a7d2cd81e80b901dd511c19bf89f
 
   if (response.status) {
     localStorage.clear();
@@ -79,7 +67,6 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
   const login = name;
   if (password === repeadPassword) {
     try {
-<<<<<<< HEAD
       const response = await (await fetch(`/profile/signup`, {
         method: "POST",
         headers: {
@@ -93,23 +80,6 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
         }),
       })).json();
       if (response.status) {
-=======
-      const response = await (
-        await fetch(`/profile/signup`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({
-            login,
-            email,
-            password,
-            repeadPassword,
-          }),
-        })
-      ).json();
-      if (response) {
->>>>>>> 1ca7f623faa7a7d2cd81e80b901dd511c19bf89f
         localStorage.setItem("userSession", response.status);
         localStorage.setItem("userName", response.userSession.login);
         localStorage.setItem("userId", response.userSession.id);
@@ -121,12 +91,8 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
       alert("Ошибка, сервер недоступен");
     }
   }
-<<<<<<< HEAD
 }
 
-=======
-};
->>>>>>> 1ca7f623faa7a7d2cd81e80b901dd511c19bf89f
 
 const getFetchSearchQuery = async (searchQuery) => {
   // console.log( 'searchQuery',searchQuery)
@@ -266,7 +232,6 @@ function* setStateSaga(action) {
   }
 }
 
-<<<<<<< HEAD
 function* missedPersonPage(action) {
   try {
     const result = yield call(personFetch, action.id);
@@ -277,8 +242,8 @@ function* missedPersonPage(action) {
 }
 
 
-=======
 const fetchUpdUser = async (action, coordinates) => {
+  console.log(action)
   const id = action.id;
   const obj = action;
   const user = action.user;
@@ -319,7 +284,6 @@ function* updateUser(id) {
     console.error(e.message);
   }
 }
->>>>>>> 1ca7f623faa7a7d2cd81e80b901dd511c19bf89f
 
 // Функция-наблюдатель.
 function* saga() {
@@ -327,18 +291,10 @@ function* saga() {
   yield takeEvery(actionTypes.logoutSaga, logoutPage);
   yield takeEvery(actionTypes.registerSaga, registerPage);
   yield takeEvery(ADD_POINT, addPointFetch);
-<<<<<<< HEAD
   yield takeEvery(SET_SAGA_STATE, setStateSaga)
   yield takeEvery(actionTypes.missedPersonSaga, missedPersonPage)
-  // action chto bi poluchit pointi
-}
-
-
-=======
-  yield takeEvery(SET_SAGA_STATE, setStateSaga);
   yield takeEvery(UPDATE_USER, updateUser);
   // action chto bi poluchit pointi
 }
 
->>>>>>> 1ca7f623faa7a7d2cd81e80b901dd511c19bf89f
 export default saga;

@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
         url: null,
         isLoading: null,
       };
-    case actionTypes.loginSaga:
+    case actionTypes.loginFetch:
       return {
         ...state,
         errorMessage: null,
@@ -48,13 +48,13 @@ const reducer = (state = initialState, action) => {
         isLoading: null,
         loginSessions: true,
       };
-    case actionTypes.logoutSaga:
+    case actionTypes.logoutFetch:
       return {
         ...state,
         errorMessage: null,
         url: null,
         isLoading: null,
-        loginSessions: false,
+        loginSessions: null,
       };
     case "IMAGE/SET_IMAGE":
       return {

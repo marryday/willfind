@@ -121,7 +121,7 @@ router.post("/signin", async (req, res) => {
 router.post("/signup", async (req, res) => {
   const { login, email, password } = req.body;
   console.log('signup')
-  console.log('req.body',req.body)
+  console.log('req.body', req.body)
   const findLogin = await User.findOne({ login: login });
   const findEmail = await User.findOne({ email: email });
 
@@ -130,23 +130,23 @@ router.post("/signup", async (req, res) => {
     let booleanEmail = findEmail ? true : false;
 
     if (booleanLogin && booleanEmail) {
-      res.json({status: false, message: "Такой аккаунт уже существует" });
+      res.json({ status: false, message: "Такой аккаунт уже существует" });
       console.log(1)
     } else if (booleanLogin) {
-      res.json({status: false, message: "Login уже существует" });
+      res.json({ status: false, message: "Login уже существует" });
       console.log(2)
     } else {
-      res.json({status: false, message: "Email уже существует" });
+      res.json({ status: false, message: "Email уже существует" });
       console.log(3)
     }
   }
-   else if(
-    !req.body.login == undefined  ||
-    !req.body.email  == undefined ||
-    !req.body.password  == undefined ||
+  else if (
+    !req.body.login == undefined ||
+    !req.body.email == undefined ||
+    !req.body.password == undefined ||
     !req.body.repeadPassword == undefined
-){
-    res.json({status: false, message: "Поля не должны быть пустыми" });
+  ) {
+    res.json({ status: false, message: "Поля не должны быть пустыми" });
   }
   else {
     const newUser = new User({
@@ -189,11 +189,12 @@ router.post("/update", async (req, res) => {
   const user = await User.findById(req.body.id);
   user.login = req.body.login;
   user.password = await bcrypt.hash(req.body.password, 10);
-  if(req.body.firstName.length > 0) user.firstName = req.body.firstName;
+  if (req.body.firstName.length > 0) user.firstName = req.body.firstName;
   if (req.body.lastName.length > 0) user.lastName = req.body.lastName;
   user.address = req.body.address;
-  user.coordinates = req.body.coordinates;  
+  user.coordinates = req.body.coordinates;
   user.email = req.body.email;
+  console.log(user)
   await user.save();
   res.json(user);
 });
