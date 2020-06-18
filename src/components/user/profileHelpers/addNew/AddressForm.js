@@ -87,9 +87,7 @@ export default function AddressForm() {
   const [authorName, setAuthorName] = useState("");
   const [authorTel, setTel] = useState("");
   const [name, setName] = useState("");
-  const [gender, setGender] = useState("");
   const [terrain, setTerrain] = useState("");
-  const [location, setLocation] = useState("");
   const [img, setImg] = useState("");
   const [birthday, setBirthday] = useState("");
   const [time, setTime] = useState("");
@@ -100,12 +98,12 @@ export default function AddressForm() {
   const [more, setMore] = useState("");
   const [specificMarks, setSpecificMarks] = useState("");
   const [value, setValue] = React.useState('Male');
+  const [searchQuery, SetSearchQuery] = useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
-  const [searchQuery, SetSearchQuery] = useState("");
 
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
@@ -137,7 +135,7 @@ export default function AddressForm() {
             authorTel: authorTel,
             name: name,
             terrain: terrain,
-            location: location,
+            addressOfLost: searchQuery,
             gender: value,
             img: url,
             birthday: birthday,
@@ -173,6 +171,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={12}>
           <TextField
             required
+
             id="description"
             name="description"
             label="Заявитель: ФИО, степень родства (обязательно)"

@@ -261,7 +261,6 @@ export const Profile = () => {
             {poteryashki ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Map /></Paper></Grid> : null}
           </Grid>
         </Container>
-        <CreateMissed />
       </main>
     </div>
   );

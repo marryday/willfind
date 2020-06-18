@@ -33,6 +33,8 @@ router.post("/missedperson", async (req, res) => {
     const author = await User.findById(req.body.author);
     console.log(req.body.url);
     const poteryash = await new Poteryash({
+      authorName: req.body.authorName,
+      authorTel: req.body.authorTel,
       firstName,
       lastName,
       middleName,
@@ -89,8 +91,8 @@ router.get("/countcoordinates", async (req, res) => {
     let poteryashes = await Poteryash.find();
     let matches = poteryashes.filter(
       poteryashes.map((p) => p.coordinates[0] + p.coordinates[1]) -
-        (user.coordinates[0] + user.coordinates[1]) <
-        0.5
+      (user.coordinates[0] + user.coordinates[1]) <
+      0.5
     );
     console.log(matches);
   } catch (e) {

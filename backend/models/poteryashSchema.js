@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const poteryashSchema = new mongoose.Schema({
   firstName: { type: String },
+  authorName: { type: String },
+  authorTel: { type: String },
   lastName: { type: String },
   middleName: { type: String },
   sex: { type: String },
