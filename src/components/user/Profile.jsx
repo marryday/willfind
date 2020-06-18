@@ -197,11 +197,10 @@ export const Profile = () => {
               </Paper>
             </Grid>
           </Grid>
-          <Box pt={4}>
+          {/*           <Box pt={4}>
             <Copyright />
-          </Box>
+          </Box> */}
         </Container>
-        <CreateMissed />
       </main>
     </div>
   );
