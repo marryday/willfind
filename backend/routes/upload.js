@@ -121,7 +121,7 @@ router.get("/countcoordinates/:id", async (req, res) => {
       const nashel = poteryashes.filter(p => p.sumCoordinates === result[0])
     
       // const nashel = poteryashes.filter(p => func2(p.sumCoordinates, result))
-    console.log(nashel)
+    res.json(nashel)
     
     //  poteryashes.map(p => p.coordinates.forEach(e =>  result.push(Number(e))));
     // console.log(result)

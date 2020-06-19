@@ -1,25 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { useDispatch } from 'react-redux'
-import {setAddress} from '../../../../redux/actions'
+import React, { useState, useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { useDispatch } from "react-redux";
+import { setAddress } from "../../../../redux/actions";
 export default function AddressForm() {
-  const dispatch = useDispatch()
-  const [name, setName] = useState('')
-  const [lastName, setLastName] = useState('');
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [searchQuery, SetSearchQuery] = useState("");
-  const id = localStorage.getItem('userId')
-  useEffect(() => {
-    fetch(`profile/update/${id}`,{
-      method:'GET'
-    }).then(result => result.json().then(data => {setName(data.firstName); setLastName(data.lastName); SetSearchQuery(data.address)}))}, [])
+  const id = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetch(`upload/countcoordinates/${id}`, {method:'GET'}).then(r => r.json().then(data => console.log(data)))
-  })
+    fetch(`profile/update/${id}`, {
+      method: "GET",
+    }).then((result) =>
+      result.json().then((data) => {
+        setName(data.firstName);
+        setLastName(data.lastName);
+        SetSearchQuery(data.address);
+      })
+    );
+  }, []);
+
+
 
   const handleInput = (event) => {
     SetSearchQuery(event.target.value);
@@ -27,12 +33,13 @@ export default function AddressForm() {
       name,
       lastName,
       address: searchQuery,
-    }
-    dispatch(setAddress(user))
+    };
+    dispatch(setAddress(user));
   };
 
   return (
     <React.Fragment>
+     
       <Typography variant="h6" gutterBottom>
         Имя и адрес
       </Typography>
@@ -46,13 +53,13 @@ export default function AddressForm() {
             value={name}
             fullWidth
             autoComplete="given-name"
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            onChange={e => setLastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value)}
             id="lastName"
             value={lastName}
             name="lastName"
