@@ -28,7 +28,7 @@ import CreateMissed from '../CreateMissed';
 import Map from '../map';
 import AddNewPoteryah from './profileHelpers/addNew/AddNewPoteryash';
 import AddressForm from './profileHelpers/addNew/AddressForm';
-
+import Matches from "../Matches";
 
 function Copyright() {
   return (
@@ -103,12 +103,12 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
+  // appBarSpacer: theme.mixins.toolbar,
+  // content: {
+  //   flexGrow: 1,
+  //   height: '100vh',
+  //   overflow: 'auto',
+  // },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
@@ -236,14 +236,15 @@ export const Profile = () => {
             {search ? <Grid item xs={12} md={4} lg={3}><Paper className={fixedHeightPaper}><Deposits /></Paper></Grid> : null}
 
             {/* Recent Orders */}
+            {newone ? <Grid item xs={12} md={4} lg={12}><Paper className={classes.fixedPaddings}><Matches /></Paper></Grid> : null}
             {found ? <Grid item xs={12}><Paper className={classes.paper}><Orders /></Paper></Grid> : null}
-            {yourData ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Checkout /></Paper></Grid> : null}
-            {addNew ? <Grid item xs={12} md={4} lg={10}><Paper className={classes.fixedPaddings}><AddressForm /></Paper></Grid> : null}
-            {poteryashki ? <Grid item xs={12} md={4} lg={3}><Paper className={classes.fixedPaddings}><Map /></Paper></Grid> : null}
+            {yourData ? <Grid item xs={12} md={4} lg={12}><Paper className={classes.fixedPaddings}><Checkout /></Paper></Grid> : null}
+            {addNew ? <Grid item xs={12} md={4} lg={12}><Paper className={classes.fixedPaddings}><AddressForm /></Paper></Grid> : null}
+            {poteryashki ? <Grid item xs={12} md={4} lg={12}><Paper className={classes.fixedPaddings}><Map /></Paper></Grid> : null}
           </Grid>
         </Container>
       </main>
-    </div>
+    </div >
   );
 }
 

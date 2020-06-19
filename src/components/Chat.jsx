@@ -118,7 +118,7 @@ export default () => {
               <div className="fotoFindPeople"><img src={state.image}></img></div>
               <div>
                 <div> <h4> {state.sex === "Male" ? 'Пропал' : 'Пропала'}</h4></div>
-                <div> <h5> {state.lastName} {state.firsName} {state.middleName}</h5></div>
+                <div> <h5> {state.lastName} {state.firstName} {state.middleName}</h5></div>
                 <div> <b>Возраст:</b> {state.ages}  </div>
                 <div> <b>Состояние здоровья:</b> {state.health} </div>
                 <div> <b>Местоположение:</b> {state.addressOfLost} </div>

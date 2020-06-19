@@ -25,7 +25,7 @@ export const mainListItems = (props) => (
       <ListItemIcon>
         <DirectionsWalkIcon />
       </ListItemIcon>
-      <ListItemText primary="Новые" />
+      <ListItemText primary="Поиск рядом с Вами" />
     </ListItem>
     <ListItem button onClick={() => props.handleOpenPoteryashki()}>
       <ListItemIcon>

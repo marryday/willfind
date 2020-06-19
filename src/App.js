@@ -11,6 +11,7 @@ import PoteryashList from './components/PoteryshList'
 import CreateMissed from './components/CreateMissed'
 import Chat from './components/Chat'
 import MainPage from './components/mainPage/MainPage'
+import Copyright from "./components/Copyright";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
 
       {/*<Redirect to={'/404'}></Redirect>*/}
       {/*<Route render={() => <h1 style={{color: 'red', textAlign: 'center'}}>404 not found</h1>} />*/}
+      <Copyright />
     </Router>
   );
 }

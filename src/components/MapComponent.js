@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {YMaps, Map, Clusterer, Placemark} from "../ymaps";
-import {setSagaState} from '../redux/actions'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { YMaps, Map, Clusterer, Placemark } from "../ymaps";
+import { setSagaState } from '../redux/actions'
 
 const mapState = {
   center: [55.751574, 37.573856],
@@ -21,7 +21,7 @@ const getPointData = (
   return {
     balloonContentBody:
       `<address>
-      <strong>${firstName} ${lastName} ${middleName}</strong>,
+      <h5><strong>${firstName} ${lastName} ${middleName}</strong></h5>,
       <br/>
       <img 
       alt="Remy Sharp"
@@ -48,7 +48,7 @@ const getPointOptions = () => {
 export default function MapComponent() {
   const dispatch = useDispatch();
   const [searchQuery, SetSearchQuery] = useState('')
-  const obj = {type: 'SET_STATE'}
+  const obj = { type: 'SET_STATE' }
 
   useEffect(() => {
     dispatch(setSagaState())
@@ -84,7 +84,7 @@ export default function MapComponent() {
               {personsObjectArray.length > 0 && personsObjectArray.map((objUser, idx) => {
                 return <Placemark
                   key={objUser._id}
-                  geometry={{coordinates: objUser.coordinates}}
+                  geometry={{ coordinates: objUser.coordinates }}
                   properties={
                     getPointData(
                       objUser.firstName,

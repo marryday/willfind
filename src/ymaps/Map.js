@@ -19,8 +19,8 @@ export class Map extends React.Component {
       center: [0, 0],
       zoom: 1
     },
-    width: 800,
-    height: 630,
+    width: 1000,
+    height: 700,
     instanceRef: Function.prototype
   };
 

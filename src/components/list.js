@@ -48,7 +48,7 @@ export default function ListFind() {
                           color="textPrimary"
                         >
 
-                          {item.firstName} {item.middleName} {item.lastName}
+                          {item.lastName} {item.firstName} {item.middleName}
                         </Typography>
                         <div>Состояние здоровья: {item.health}</div>
                         <div>Возраст: {item.ages ? item.ages : 'не известен'}</div>

@@ -24,6 +24,11 @@ code {
   margin: 10px;
 }
 
+.closeToYou{
+  width: 700px;
+  height: 600px;
+}
+
 .aNav:hover{
   text-decoration: none;
   color: white;
