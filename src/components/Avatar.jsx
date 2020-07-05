@@ -41,7 +41,6 @@ export default function CropForm() {
   const [url, setUrl] = useState(null);
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
-      console.log(e.target.files);
       const reader = new FileReader();
       reader.addEventListener('load', () =>
         setState({ ...state, src: reader.result })
@@ -78,7 +77,6 @@ export default function CropForm() {
     canvas.width = crop.width;
     canvas.height = crop.height;
     const ctx = canvas.getContext('2d');
-    console.log(ctx.drawImage);
     ctx.drawImage(
       image,
       crop.x * scaleX,

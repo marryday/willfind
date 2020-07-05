@@ -30,13 +30,11 @@ export default () => {
   const handleInput = (event) => {
     setAddressOfLost(event.target.value);
     SetSearchQuery(event.target.value);
-    console.log(addressOfLost, searchQuery)
   };
 
 
 
   const submitHandler = async (e) => {
-    console.log("123");
     try {
       const result = await (
         await fetch("/upload/missedperson", {
@@ -68,10 +66,6 @@ export default () => {
     } catch (e) {
       console.error(e.message)
     }
-    // if (result.ok === "ok") {
-    //   history.goBack();
-    // }
-
   };
   return (
     <div

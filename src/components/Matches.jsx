@@ -9,20 +9,12 @@ export default () => {
   useEffect(() => {
     fetch(`upload/countcoordinates/${id}`, { method: "GET" }).then((r) =>
       r.json().then((data) => {
-        console.log(data[0]);
         setPoteryash(data[0]);
       })
     );
   }, []);
 
   return (
-    // <div className="closeToYou">
-    //   <p>
-    //     Не далеко от вас пропал {poteryash.firstName} {poteryash.lastName}! В
-    //     последний раз замечен на {poteryash.addressOfLost}
-    //   </p>
-    //   <img src={poteryash.image}></img>
-    // </div>
 
 
     <Fragment>

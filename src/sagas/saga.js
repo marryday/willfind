@@ -42,7 +42,6 @@ const fetchLogin = async ({ email, password }) => {
 };
 
 const fetchLogout = async () => {
-  //try {
   const response = await fetch(`/profile/logout`, {
     method: "POST",
     headers: {
@@ -57,9 +56,6 @@ const fetchLogout = async () => {
   } else {
     alert("net nichego");
   }
-  //} catch (e) {
-  // console.message("Ошибка, сервер недоступен", e);
-  // }
 };
 
 const fetchRegister = async ({ name, email, password, repeadPassword }) => {
@@ -93,7 +89,6 @@ const fetchRegister = async ({ name, email, password, repeadPassword }) => {
 };
 
 const getFetchSearchQuery = async (searchQuery) => {
-  // console.log( 'searchQuery',searchQuery)
   try {
     const response = await fetch(
       `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${TOKEN}&geocode=${searchQuery.payload}`
@@ -105,12 +100,6 @@ const getFetchSearchQuery = async (searchQuery) => {
     const latitude = coordinates[1];
     const longitude = coordinates[0];
 
-    // console.log('result', result)
-    // console.log('coordinates', coordinates)
-    // console.log('latitude', latitude)
-    // console.log('longitude', longitude)
-    // let placemark = new YMaps.Placemark([latitude, longitude], {})
-    // if (coordinates) Map.geoObjects.add(placemark);
     return [latitude, longitude];
   } catch (error) {
     console.error(error.message);
@@ -138,7 +127,6 @@ function* logoutPage(action) {
     const logout = yield call(fetchLogout);
     console.log(logout);
     yield put(logoutFetch(logout));
-    //yield put(history.push('/'))
   } catch (error) {
     yield put(loadingError(error.message));
   }
@@ -157,7 +145,6 @@ function* registerPage(action) {
     console.log(result);
     if (!result.status) {
       yield put(showAlert(result.message))
-      //history.push('/registration')
     } else {
       yield put(registerFetch(result));
       history.push('/profile')

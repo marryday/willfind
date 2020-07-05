@@ -54,7 +54,6 @@ export default function MapComponent() {
     dispatch(setSagaState())
   }, [])
   const personsObjectArray = useSelector((state) => state.mapReducer.points)
-  console.log(personsObjectArray)
 
 
   const handleInput = (event) => {

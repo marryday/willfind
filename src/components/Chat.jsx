@@ -93,10 +93,8 @@ export default () => {
     uploadTask.on(
       "state_changed",
       (snapShot) => {
-        console.log(snapShot);
       },
       (err) => {
-        console.log(err);
       },
       () =>
         firebase

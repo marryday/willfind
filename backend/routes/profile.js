@@ -55,11 +55,10 @@ router.get("/edit", async (req, res) => {
 router.post("/edit", async (req, res) => {
   const userSession = req.session.user;
   const { login, email } = req.body;
-  // console.log("login: " + login, "password: " + password);
+
   const findLogin = await User.findOne({ login: login });
   const findEmail = await User.findOne({ email: email });
-  // console.log(findLogin._id, req.session.user.id);
-  // console.log(findLogin._id,  req.session.user.id);
+
 
   if (findLogin && findEmail) {
     if (
@@ -120,8 +119,7 @@ router.post("/signin", async (req, res) => {
 //POST: Регистрация пользователя
 router.post("/signup", async (req, res) => {
   const { login, email, password } = req.body;
-  console.log('signup')
-  console.log('req.body', req.body)
+
   const findLogin = await User.findOne({ login: login });
   const findEmail = await User.findOne({ email: email });
 
@@ -131,13 +129,13 @@ router.post("/signup", async (req, res) => {
 
     if (booleanLogin && booleanEmail) {
       res.json({ status: false, message: "Такой аккаунт уже существует" });
-      console.log(1)
+
     } else if (booleanLogin) {
       res.json({ status: false, message: "Login уже существует" });
-      console.log(2)
+
     } else {
       res.json({ status: false, message: "Email уже существует" });
-      console.log(3)
+
     }
   }
   else if (
@@ -179,13 +177,11 @@ router.post("/session", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  console.log("Да чувак, ты здесь");
   req.session.destroy();
   res.json({ status: true });
 });
 
 router.post("/update", async (req, res) => {
-  // console.log(req.body);
   const user = await User.findById(req.body.id);
   user.login = req.body.login;
   user.password = await bcrypt.hash(req.body.password, 10);
@@ -194,7 +190,6 @@ router.post("/update", async (req, res) => {
   user.address = req.body.address;
   user.coordinates = req.body.coordinates;
   user.email = req.body.email;
-  // console.log(user)
   await user.save();
   res.json(user);
 });
@@ -202,7 +197,6 @@ router.post("/update", async (req, res) => {
 
 router.get('/update/:id', async (req, res) => {
   const user = await User.findById(req.params.id);
-  // console.log(user)
   res.json(user)
 })
 module.exports = router;

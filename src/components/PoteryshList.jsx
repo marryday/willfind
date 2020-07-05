@@ -29,13 +29,11 @@ export default () => {
     fetch("/upload/missedpeople").then((result) =>
       result.json().then((response) => {
         setPpl(response.ppl);
-        console.log(response.ppl);
       })
     );
   }, []);
 
   const getAges = (year) =>{ 
-    console.log(year);
     return (new Date().getFullYear() - Number(year))
   }
 

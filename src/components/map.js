@@ -10,7 +10,6 @@ export default function Map() {
   //useEffect(() => { }, [map])
 
   const changeComponent = (bol) => {
-    console.log(bol)
     setMap(bol);
   }
   return (

@@ -11,7 +11,6 @@ import AlertComponent from "../components/Alert"
 export default function RegisterUser() {
   const state = useSelector((state) => state);
   const errorMessage = useSelector((state) => state.appReducer.alert);
-  console.log(errorMessage)
   const dispatch = useDispatch();
 
   const useStyles = makeStyles((theme) => ({
